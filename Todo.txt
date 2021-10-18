@@ -1,0 +1,17 @@
+Bugs
+- All levels are accessable by URL
+- you can skip startGame()
+- you dont have to go to listed locations from current room
+- cant die
+- cant win
+
+
+Features:
+- add starting tool selection
+- add room events
+- add crypt boss
+- add witch hut boss
+- add 4 events
+- add big baddie boss
+- add win condition
+
