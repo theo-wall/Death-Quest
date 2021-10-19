@@ -18,14 +18,14 @@ let toolIndex = ['sword', 'Bow', 'Torch']
 function startGame() {
     
     gameMap = ['event1', 'event2', 'event3', 'event4']
-    player = [rooms[0], 'noTool', 'noItem1', 'noItem2', 'alive', gameMap,]
+    player = [rooms[0], 'noTool', 'noItem1', 'noItem2', gameMap,]
     
     return player 
 }
 
 function resetGame() {
 
-    player = [rooms[0], 'noTool', 'noItem1', 'noItem2', 'alive', gameMap]
+    player = [rooms[0], 'noTool', 'noItem1', 'noItem2', gameMap]
     gameMap = ['event1', 'event2', 'event3', 'event4']
 }
 
@@ -41,10 +41,15 @@ function toolPicker() {
     return tool 
 } 
 
+function giveItem (player,Item,slot) {
+    
+}
+
 
 module.exports = {
     startGame,
     resetGame,
     roomChanger,
-    toolPicker
+    toolPicker,
+    giveItem
 }

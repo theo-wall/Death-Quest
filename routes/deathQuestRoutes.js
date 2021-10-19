@@ -3,7 +3,7 @@ const deathQuestGameFunctions = require('../model/deathQuestGameFunctions')
 const express = require('express')
 const router = express.Router()
 
-let rooms = ['/start1', '/caves2', '/windingPath3', '/crypt4', '/swamp5', '/slimePuddles6', '/witchHut7', '/cliffSide8', '/bridgePlateau9', '/castle10', '/bigBaddie11','death12']
+let rooms = ['/start1', '/caves2', '/windingPath3', '/crypt4', '/swamp5', '/slimePuddles6', '/witchHut7', '/cliffSide8', '/bridgePlateau9', '/castle10', '/bigBaddie11','deathRoom12', 'necromancerGame13']
 
 let player = []
 
@@ -57,35 +57,65 @@ router.get('/start1', (req, res) => {
 })
 
 router.get('/caves2', (req, res) => {
-    if (player[1] === 'torch') {
-        res.send(`You are in caves2 you see two paths you can go down your torch lights the way ahead of you:
+    if (player[1] === 'Torch') {
+        res.send(`You are in caves2, you see two paths you can go down your torch lights the way ahead of you:
         ${rooms[0]} 
         ${rooms[2]} 
         `)
         player = deathQuestGameFunctions.roomChanger(player, 2)
     } 
     else {
-        res.send(`You are in caves2 cant see anything around you, suddenly your foot is falling, you're falling, death comes siftly:
+        res.send(`You are in ${player[0]} cant see anything around you, suddenly your foot is falling, you're falling, death comes siftly:
         ${rooms[11]} 
         `)
     }
 }) 
 
 router.get('/windingPath3', (req, res) => {
-    res.send(`You are in windingPath3 you see three paths you can go down:
-    ${rooms[1]}
-    ${rooms[5]}
-    ${rooms[3]}
-    `)
-    player = deathQuestGameFunctions.roomChanger(player, 3)
+    if (player[1] === 'Torch') {
+        res.send(`You are in windingPath3, your torch lights the way you see three paths you can go down:
+        ${rooms[1]}
+        ${rooms[5]}
+        ${rooms[3]}
+        `)
+        player = deathQuestGameFunctions.roomChanger(player, 3)
+    }
+    else {
+        res.send(`You are in ${player[0]} cant see anything around you, suddenly your foot is falling, you're falling, death comes siftly:
+        ${rooms[11]} 
+        `)
+    }
+
 }) 
 
 router.get('/crypt4', (req, res) => {
-    res.send(`You are in crypt4 you see one path you can go down:
+    res.send(`You are in crypt4, In front of you is a necromancer holding three cups, he asks you if you would like to play a game
+    a wager of your life for a precious ruby. Or you can run away like a sissy:
     ${rooms[2]}
+    ${rooms[12]}
     `)
     player = deathQuestGameFunctions.roomChanger(player, 4)
-}) 
+})
+
+router.get('/necromancerGame13', (req, res) => {
+    
+    let winGame = Math.floor(Math.random() * 10)
+    console.log(winGame)
+
+    if (winGame <= 5) {
+        res.send(`You won the necromancers game! continue on with your adventure "/crypt"`)
+
+    }
+    else if (winGame > 5) {
+        res.send(`You lost the necromancers game, your soul is forfit "/deathRoom"`)
+    }
+
+
+
+    
+    
+
+})
 
 router.get('/swamp5', (req, res) => {
     res.send(`You are in swamp5 you see two paths you can go down:
@@ -144,8 +174,11 @@ router.get('/bigBaddie11', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 11)
 }) 
 
-router.get('/3', (req, res) => {
-
+router.get('/deathRoom12', (req, res) => {
+    res.send(`You are dead, start from the beginning:
+    ${'start1a'}
+    `)
+    player = deathQuestGameFunctions.roomChanger(player, 1)
 }) 
 
 router.get('/4', (req, res) => {
