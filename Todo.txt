@@ -2,7 +2,7 @@ Bugs
 - All levels are accessable by URL
 - you can skip startGame()
 - you dont have to go to listed locations from current room
-- cant die
+- added death in caves2, have to make death room that starts you over with all your stuff
 - cant win
 
 

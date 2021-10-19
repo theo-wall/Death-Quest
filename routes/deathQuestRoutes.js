@@ -3,7 +3,7 @@ const deathQuestGameFunctions = require('../model/deathQuestGameFunctions')
 const express = require('express')
 const router = express.Router()
 
-let rooms = ['/start1', '/caves2', '/windingPath3', '/crypt4', '/swamp5', '/slimePuddles6', '/witchHut7', '/cliffSide8', '/bridgePlateau9', '/castle10', '/bigBaddie11']
+let rooms = ['/start1', '/caves2', '/windingPath3', '/crypt4', '/swamp5', '/slimePuddles6', '/witchHut7', '/cliffSide8', '/bridgePlateau9', '/castle10', '/bigBaddie11','death12']
 
 let player = []
 
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     You are trying to kill the big baddie! 
     try not to die! but it might not be as bad as you think... hehehe
     "/startGame" to continue
-`
+    `
     res.send(instructions)
 })
 
@@ -57,11 +57,18 @@ router.get('/start1', (req, res) => {
 })
 
 router.get('/caves2', (req, res) => {
-    res.send(`You are in caves2 you see two paths you can go down:
-    ${rooms[0]} 
-    ${rooms[2]} 
-    `)
-    player = deathQuestGameFunctions.roomChanger(player, 2)
+    if (player[1] === 'torch') {
+        res.send(`You are in caves2 you see two paths you can go down your torch lights the way ahead of you:
+        ${rooms[0]} 
+        ${rooms[2]} 
+        `)
+        player = deathQuestGameFunctions.roomChanger(player, 2)
+    } 
+    else {
+        res.send(`You are in caves2 cant see anything around you, suddenly your foot is falling, you're falling, death comes siftly:
+        ${rooms[11]} 
+        `)
+    }
 }) 
 
 router.get('/windingPath3', (req, res) => {
