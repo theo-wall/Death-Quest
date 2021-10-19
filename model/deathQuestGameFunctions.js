@@ -13,9 +13,7 @@ let rooms =
 
 let player
 let gameMap
-function listRooms() {
-    return rooms
-}
+let toolIndex = ['sword', 'Bow', 'Torch']
 
 function startGame() {
     
@@ -33,15 +31,21 @@ function resetGame() {
 
 function roomChanger(player,roomNumber) {
 
-    player = player = [rooms[roomNumber-1], 'noTool', 'noItem1', 'noItem2', 'alive', gameMap,]
+    player[0] = rooms[roomNumber-1]
     console.log(player)
     return player
+}
 
-        
-    }
+function toolPicker() {
+    let tool = toolIndex[Math.floor(Math.random() * 3)]
+    console.log(tool)
+    return tool 
+} 
+
 
 module.exports = {
     startGame,
     resetGame,
-    roomChanger
+    roomChanger,
+    toolPicker
 }

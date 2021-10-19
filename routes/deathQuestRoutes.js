@@ -5,14 +5,15 @@ const router = express.Router()
 
 let rooms = ['/start1', '/caves2', '/windingPath3', '/crypt4', '/swamp5', '/slimePuddles6', '/witchHut7', '/cliffSide8', '/bridgePlateau9', '/castle10', '/bigBaddie11']
 
-let player
+let player = []
+
 
 router.get('/', (req, res) => {
 
     let instructions =
         `
         Welcome to Death Quest!
-    You are tryiing to kill the big baddie! 
+    You are trying to kill the big baddie! 
     try not to die! but it might not be as bad as you think... hehehe
     "/startGame" to continue
 `
@@ -21,7 +22,7 @@ router.get('/', (req, res) => {
 
 router.get('/startGame', (req, res) => {
     player = deathQuestGameFunctions.startGame()
-    res.send('You become consious in a world of darkness and pain do you?\n 1)"/start1" Open your eyes.\n 2)"/resetGame" Drift off into sleep.')
+    res.send('You become consious in a world of darkness and pain do you?\n 1)"/start1a" Open your eyes.\n 2)"/resetGame" Drift off into sleep.')
     console.log(player)
 })
 
@@ -31,14 +32,32 @@ router.get('/resetGame', (req, res) => {
     console.log(player)
 })
 
-router.get('/start1', (req, res) => {
-    res.send(`You are in start1 you see three paths you can go down:
+router.get('/start1a', (req, res) => {    
+    
+    
+    
+    player[1] = deathQuestGameFunctions.toolPicker()
+    console.log(player)
+    res.send(`You step out of the ring and you see a ${player[1]} laying on the ground before you before you, you pick it up. You are in start1 you see three paths you can go down:
     ${rooms[1]} 
     ${rooms[4]} 
     ${rooms[7]}
     `)
     player = deathQuestGameFunctions.roomChanger(player,1)
-    }) 
+})
+
+
+
+
+router.get('/start1', (req, res) => {
+    player[1] = toolIndex[Math.floor(Math.random() * toolIndex.length())]
+    res.send(`You are in start1 you see three paths you can go down:
+    ${rooms[1]} 
+    ${rooms[4]} 
+    ${rooms[7]}
+    `)
+    player = deathQuestGameFunctions.roomChanger(player, 1)
+})
 
 router.get('/caves2', (req, res) => {
     res.send(`You are in caves2 you see two paths you can go down:
