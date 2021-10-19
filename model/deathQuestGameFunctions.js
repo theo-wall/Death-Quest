@@ -40,7 +40,7 @@ function roomChanger(player,roomNumber) {
 }
 
 function toolPicker() {
-    let tool = toolIndex[Math.floor(Math.random() * 3)]
+    let tool = toolIndex[generateRandNum(3)]
     return tool 
 } 
 
@@ -74,6 +74,10 @@ function eventPlacer(player,event) {
     }
 }
 
+// generates random number from 0 to number specified(num)
+function generateRandNum(num) {
+   return Math.floor(Math.random() * num)
+}
 
 module.exports = {
     startGame,
@@ -81,5 +85,6 @@ module.exports = {
     roomChanger,
     toolPicker,
     giveItem,
-    eventPlacer
+    eventPlacer,
+    generateRandNum
 }

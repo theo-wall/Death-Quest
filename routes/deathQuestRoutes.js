@@ -1,6 +1,7 @@
 const deathQuestGameFunctions = require('../model/deathQuestGameFunctions')
 
 const express = require('express')
+const { generateRandNum } = require('../model/deathQuestGameFunctions')
 const router = express.Router()
 
 let rooms = ['/start1', '/caves2', '/windingPath3', '/crypt4', '/swamp5', '/slimePuddles6', '/witchHut7', '/cliffSide8', '/bridgePlateau9', '/castle10', '/bigBaddie11','/deathRoom12', '/necromancerGame13']
@@ -43,11 +44,7 @@ router.get('/start1a', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player,1)
 })
 
-
-
-
 router.get('/start1', (req, res) => {
-    player[1] = toolIndex[Math.floor(Math.random() * toolIndex.length())]
     res.send(`You are in start1 you see three paths you can go down:
     ${rooms[1]} 
     ${rooms[4]} 
@@ -106,7 +103,7 @@ router.get('/crypt4', (req, res) => {
 
 router.get('/necromancerGame13', (req, res) => {
     
-    let winGame = Math.floor(Math.random() * 10)
+    let winGame = deathQuestGameFunctions.generateRandNum(10)
     console.log(winGame)
 
     if (winGame <= 5) {
@@ -116,16 +113,24 @@ router.get('/necromancerGame13', (req, res) => {
 
     }
     else if (winGame > 5) {
-        res.send(`You lost the necromancers game, your soul is forfit "/deathRoom"`)
+        res.send(`You lost the necromancers game, your soul is forfeit "/deathRoom12"`)
     } 
 })
 
 router.get('/swamp5', (req, res) => {
-    res.send(`You are in swamp5 you see two paths you can go down:
-    ${rooms[0]}
-    ${rooms[5]}
-    `)
-    player = deathQuestGameFunctions.roomChanger(player, 5)
+    
+    let slipCheck = deathQuestGameFunctions.generateRandNum(10)
+
+    if (slipCheck <= 5) {
+        res.send(`You are in swamp5, you make your way carefully over the slimey boardwalk, you see two paths you can go down:
+        ${rooms[0]}
+        ${rooms[5]}
+        `)
+        player = deathQuestGameFunctions.roomChanger(player, 5)
+    } 
+    else if (slipCheck > 5) {
+        res.send(`You start to make your way out across the boards, YOU SLIP, you go headfirst into the swamp and drown very inconveniently "/deathRoom12"`)
+    }
 }) 
 
 router.get('/slimePuddles6', (req, res) => {
@@ -187,27 +192,5 @@ router.get('/deathRoom12', (req, res) => {
 router.get('/4', (req, res) => {
     res.json(deathQuestGameFunctions.listRooms())
 })
-
-router.get('/move', (req, res) => {
-    console.log('move is called with ', req.query)
-    let room = req.query.room 
-    deathQuestGameFunctions.move(room)
-    res.send('You have moved to the ' + room + '\n')
-})
-
-router.get('/search', (req, res) => {
-    let message
-    let found = deathQuestGameFunctions.search()
-    if (found) {
-        message = 'You just found the hider!'
-    }
-    else {
-       message = 'You search and find no-one!'
-    }
-    res.send(message + '\n')
-})
-
-
-
 
 module.exports = router
