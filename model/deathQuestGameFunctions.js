@@ -13,20 +13,23 @@ let rooms =
 
 let player
 let gameMap
-let toolIndex = ['sword', 'Bow', 'Torch']
+let toolIndex = ['Sword', 'Bow', 'Torch']
+let itemIndex = ['Ruby', 'Golden Key']
+let eventIndex = ['necroDoor', 'witchHutMelt', 'drawBridge', 'bigBaddie']
 
 function startGame() {
     
-    gameMap = ['event1', 'event2', 'event3', 'event4']
+    gameMap = ['noEvent', 'noEvent', 'noEvent', 'noEvent']
     player = [rooms[0], 'noTool', 'noItem1', 'noItem2', gameMap,]
     
     return player 
 }
 
 function resetGame() {
-
-    player = [rooms[0], 'noTool', 'noItem1', 'noItem2', gameMap]
+    
     gameMap = ['event1', 'event2', 'event3', 'event4']
+    player = [rooms[0], 'noTool', 'noItem1', 'noItem2', gameMap]
+    
 }
 
 function roomChanger(player,roomNumber) {
@@ -41,8 +44,34 @@ function toolPicker() {
     return tool 
 } 
 
-function giveItem (player,Item,slot) {
-    
+function giveItem (player,item) {
+    if (item === 1) {
+        player[2] = itemIndex[0]
+        return player
+    }
+    else if (item === 2) {
+        player[3] = itemIndex[1]
+        return player
+    }
+}
+
+function eventPlacer(player,event) {
+    if (event === 1) {
+        player[4][0] = eventIndex[0]
+        return player
+    }
+    else if (event === 2) {
+        player[4][1] = eventIndex[1]
+        return player
+    }
+    else if (event === 3) {
+        player[4][2] = eventIndex[2]
+        return player
+    }
+    else if (event === 4) {
+        player[4][3] = eventIndex[3]
+        return player
+    }
 }
 
 
@@ -51,5 +80,6 @@ module.exports = {
     resetGame,
     roomChanger,
     toolPicker,
-    giveItem
+    giveItem,
+    eventPlacer
 }

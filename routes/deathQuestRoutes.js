@@ -3,7 +3,7 @@ const deathQuestGameFunctions = require('../model/deathQuestGameFunctions')
 const express = require('express')
 const router = express.Router()
 
-let rooms = ['/start1', '/caves2', '/windingPath3', '/crypt4', '/swamp5', '/slimePuddles6', '/witchHut7', '/cliffSide8', '/bridgePlateau9', '/castle10', '/bigBaddie11','deathRoom12', 'necromancerGame13']
+let rooms = ['/start1', '/caves2', '/windingPath3', '/crypt4', '/swamp5', '/slimePuddles6', '/witchHut7', '/cliffSide8', '/bridgePlateau9', '/castle10', '/bigBaddie11','/deathRoom12', '/necromancerGame13']
 
 let player = []
 
@@ -89,12 +89,19 @@ router.get('/windingPath3', (req, res) => {
 }) 
 
 router.get('/crypt4', (req, res) => {
-    res.send(`You are in crypt4, In front of you is a necromancer holding three cups, he asks you if you would like to play a game
-    a wager of your life for a precious ruby. Or you can run away like a sissy:
-    ${rooms[2]}
-    ${rooms[12]}
-    `)
-    player = deathQuestGameFunctions.roomChanger(player, 4)
+    if (player[4][0] === 'necroDoor') {
+        res.send(`
+            You are in crypt4, the necromancer is no where to be found, I guess he took that personally. travel back to ${rooms[2]} and continue your adventure.
+        `)
+    }
+    else {
+        res.send(`You are in crypt4, In front of you is a necromancer holding three cups, he asks you if you would like to play a game
+        a wager of your life for a precious ruby. Or you can run away like a sissy:
+        ${rooms[2]}
+        ${rooms[12]}
+        `)
+        player = deathQuestGameFunctions.roomChanger(player, 4)
+    }
 })
 
 router.get('/necromancerGame13', (req, res) => {
@@ -103,18 +110,14 @@ router.get('/necromancerGame13', (req, res) => {
     console.log(winGame)
 
     if (winGame <= 5) {
-        res.send(`You won the necromancers game! continue on with your adventure "/crypt"`)
+        res.send(`You won the necromancers game! continue on with your adventure "/crypt4"`)
+        player = deathQuestGameFunctions.giveItem(player,1)
+        player = deathQuestGameFunctions.eventPlacer(player,1)
 
     }
     else if (winGame > 5) {
         res.send(`You lost the necromancers game, your soul is forfit "/deathRoom"`)
-    }
-
-
-
-    
-    
-
+    } 
 })
 
 router.get('/swamp5', (req, res) => {
