@@ -38,7 +38,6 @@ function roomChanger(player,roomNumber) {
 
 function toolPicker() {
     let tool = toolIndex[Math.floor(Math.random() * 3)]
-    console.log(tool)
     return tool 
 } 
 

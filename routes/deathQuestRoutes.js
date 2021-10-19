@@ -33,11 +33,8 @@ router.get('/resetGame', (req, res) => {
 })
 
 router.get('/start1a', (req, res) => {    
-    
-    
-    
+      
     player[1] = deathQuestGameFunctions.toolPicker()
-    console.log(player)
     res.send(`You step out of the ring and you see a ${player[1]} laying on the ground before you before you, you pick it up. You are in start1 you see three paths you can go down:
     ${rooms[1]} 
     ${rooms[4]} 
