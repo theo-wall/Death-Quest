@@ -39,8 +39,9 @@ function roomChanger(player,roomNumber) {
     return player
 }
 
-function toolPicker() {
-    let tool = toolIndex[generateRandNum(3)]
+function giveTool(index) {
+    let tool = toolIndex[index]
+    console.log(tool)
     return tool 
 } 
 
@@ -83,7 +84,7 @@ module.exports = {
     startGame,
     resetGame,
     roomChanger,
-    toolPicker,
+    giveTool,
     giveItem,
     eventPlacer,
     generateRandNum

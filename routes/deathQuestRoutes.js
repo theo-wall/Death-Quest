@@ -22,29 +22,41 @@ router.get('/', (req, res) => {
 })
 
 router.get('/startGame', (req, res) => {
+    console.clear()
+
     player = deathQuestGameFunctions.startGame()
+    console.clear()
     res.send('You become consious in a world of darkness and pain do you?\n 1)"/start1a" Open your eyes.\n 2)"/resetGame" Drift off into sleep.')
     console.log(player)
 })
 
 router.get('/resetGame', (req, res) => {
+    console.clear()
+
     player = deathQuestGameFunctions.resetGame()
+    console.clear()
     res.send('You close your eyes and fade away in one last act of defiance')
     console.log(player)
 })
 
 router.get('/start1a', (req, res) => {    
-      
-    player[1] = deathQuestGameFunctions.toolPicker()
-    res.send(`You step out of the ring and you see a ${player[1]} laying on the ground before you before you, you pick it up. You are in start1 you see three paths you can go down:
+    console.clear()
+
+    res.send(`You step out of the ring and you see a "Sword", a 'Bow', and a 'Torch' laying on the ground before you before you, you pick it up. You are in start1 you see three paths you can go down:
     ${rooms[1]} 
     ${rooms[4]} 
     ${rooms[7]}
     `)
+    let tool = parseInt(req.query.tool)
+    console.log(tool)
+    
+    player[1] = deathQuestGameFunctions.giveTool(tool)
     player = deathQuestGameFunctions.roomChanger(player,1)
 })
 
 router.get('/start1', (req, res) => {
+    console.clear()
+
     res.send(`You are in start1 you see three paths you can go down:
     ${rooms[1]} 
     ${rooms[4]} 
@@ -54,6 +66,8 @@ router.get('/start1', (req, res) => {
 })
 
 router.get('/caves2', (req, res) => {
+    console.clear()
+
     if (player[1] === 'Torch') {
         res.send(`You are in caves2, you see two paths you can go down your torch lights the way ahead of you:
         ${rooms[0]} 
@@ -69,6 +83,8 @@ router.get('/caves2', (req, res) => {
 }) 
 
 router.get('/windingPath3', (req, res) => {
+    console.clear()
+
     if (player[1] === 'Torch') {
         res.send(`You are in windingPath3, your torch lights the way you see three paths you can go down:
         ${rooms[1]}
@@ -86,6 +102,8 @@ router.get('/windingPath3', (req, res) => {
 }) 
 
 router.get('/crypt4', (req, res) => {
+    console.clear()
+
     if (player[4][0] === 'necroDoor') {
         res.send(`
             You are in crypt4, the necromancer is no where to be found, I guess he took that personally. travel back to 
@@ -103,6 +121,7 @@ router.get('/crypt4', (req, res) => {
 })
 
 router.get('/necromancerGame13', (req, res) => {
+    console.clear()
     
     let winGame = deathQuestGameFunctions.generateRandNum(10)
     console.log(winGame)
@@ -119,6 +138,7 @@ router.get('/necromancerGame13', (req, res) => {
 })
 
 router.get('/swamp5', (req, res) => {
+    console.clear()
     
     let slipCheck = deathQuestGameFunctions.generateRandNum(10)
 
@@ -135,7 +155,8 @@ router.get('/swamp5', (req, res) => {
 }) 
 
 router.get('/slimePuddles6', (req, res) => {
-    
+    console.clear()
+
     if (player[1] === 'Bow') {
         res.send(`You are in slimePuddles6, you follow the board walk into the center of the vast swamp. 
         you see four paths travelling away from you but one has a draw bridge that is raised blocking your way. 
@@ -168,6 +189,7 @@ router.get('/slimePuddles6', (req, res) => {
 }) 
 
 router.get('/witchHut7', (req, res) => {
+    console.clear()
 
     if (player[2] === 'Ruby') {
 
@@ -190,6 +212,8 @@ router.get('/witchHut7', (req, res) => {
 }) 
 
 router.get('/cliffSide8', (req, res) => {
+    console.clear()
+
     res.send(`You are in cliffSide8 you see two paths you can go down:
     ${rooms[0]}
     ${rooms[8]}
@@ -198,6 +222,8 @@ router.get('/cliffSide8', (req, res) => {
 }) 
 
 router.get('/bridgePlateau9', (req, res) => {
+    console.clear()
+
     res.send(`You are in bidgePlateau9 you see three paths you can go down:
     ${rooms[7]}
     ${rooms[9]}
@@ -207,6 +233,8 @@ router.get('/bridgePlateau9', (req, res) => {
 }) 
 
 router.get('/castle10', (req, res) => {
+    console.clear()
+
     res.send(`You are in castle10 you see two paths you can go down:
     ${rooms[8]}
     ${rooms[10]}
@@ -215,6 +243,8 @@ router.get('/castle10', (req, res) => {
 }) 
 
 router.get('/bigBaddie11', (req, res) => {
+    console.clear()
+
     res.send(`You are in bigBaddie11 you WIN, walk home down:
     ${rooms[9]}
     `)
@@ -222,6 +252,8 @@ router.get('/bigBaddie11', (req, res) => {
 }) 
 
 router.get('/deathRoom12', (req, res) => {
+    console.clear()
+
     res.send(`You are dead, start from the beginning:
     ${'start1a'}
     `)
@@ -229,6 +261,8 @@ router.get('/deathRoom12', (req, res) => {
 }) 
 
 router.get('/witchGive', (req, res) => {
+    console.clear()
+
     res.send(`You hand her the gem and she eats it like a apple, she begins glowing red hot and the hut begins 
     to melt around you. You turn around and run for your life. on your way past the table you see a shiny gold key, you grab it on 
     your way out /slimePuddles6
@@ -240,6 +274,8 @@ router.get('/witchGive', (req, res) => {
 }) 
 
 router.get('/witchDie', (req, res) => {
+    console.clear()
+
     res.send(`she cackels and says "like you have any choice dear laddy", an unseen force compels you to give her the gem,
     you turn around and dive headfirst into the cauldron. Your death is long and unpleasant.
     ${'start1a'}
