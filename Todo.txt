@@ -2,16 +2,19 @@ Bugs
 - All levels are accessable by URL
 - you can skip startGame()
 - you dont have to go to listed locations from current room
-- added death in caves2, have to make death room that starts you over with all your stuff
-- cant win
+- no win state at end of game
+- tool selection doesnt quite work properly with restart mechanic
 
 
 Features:
-- add starting tool selection
-- add room events
-- add crypt boss
-- add witch hut boss
-- add 4 events
-- add big baddie boss
+- add necromancer game
 - add win condition
+- add final boss fight
+- change player to object so that you can save to database
+- finish story sections in all zones
+- make html front end with text and buttons
+- html front end map
+- 
+
+ 
 
