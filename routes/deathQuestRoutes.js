@@ -230,10 +230,12 @@ router.get('/deathRoom12', (req, res) => {
 
 router.get('/witchGive', (req, res) => {
     res.send(`You hand her the gem and she eats it like a apple, she begins glowing red hot and the hut begins 
-    to melt around you. You turn around and run for your life. /slimePuddles6
+    to melt around you. You turn around and run for your life. on your way past the table you see a shiny gold key, you grab it on 
+    your way out /slimePuddles6
     `)
     player = deathQuestGameFunctions.eventPlacer(player, 3)
     player = deathQuestGameFunctions.roomChanger(player, 6)
+    player = deathQuestGameFunctions.giveItem(player,2)
 
 }) 
 
