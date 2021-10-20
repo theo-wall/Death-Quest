@@ -134,7 +134,7 @@ router.get('/witchHut7', (req, res) => {
 
     if (player[2] === 'Ruby') {
 
-        res.send(`\nYou are in witchHut7 You see a small hut in the distance, as you walk up to the door a strong scent of sulfer hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter. Inside you see a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in my humble abode?". Your legs begin to walk over to her, you are unable to stop yourself. "Aaaaah whats this I'm smelling now? I think you have something of mine that the filthy necromancer stole from me, give it here yound lad": give it to her "/witchGive" say you are going to keep it \n"/witchDie" \n${rooms[5]}\n`)
+        res.send(`\nYou are in witchHut7 You see a small hut in the distance, as you walk up to the door a strong scent of sulfer hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter. Inside you see a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in my humble abode?". Your legs begin to walk over to her, you are unable to stop yourself. "Aaaaah whats this I'm smelling now? I think you have something of mine that the filthy necromancer stole from me, give it here yound lad": give it to her \n"/witchGive" say you are going to keep it \n"/witchDie"\n`)
         
     } else {
         res.send(`\nYou are in witchHut7 You see a small hut in the distance, as you walk up to the door a strong scent of sulfer hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter. Inside you see a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in my humble abode?". Your legs begin to walk over to her, you are unable to stop yourself. She takes a looooong sniff and says more to herself, you'll go great in the evening stew. You yell, unhand me you filthy devil, I'm out of here \n/witchDie\n`)
@@ -148,24 +148,39 @@ router.get('/cliffSide8', (req, res) => {
 }) 
 
 router.get('/bridgePlateau9', (req, res) => {
-   player = deathQuestGameFunctions.roomChanger(player, 9)
+    player = deathQuestGameFunctions.roomChanger(player, 9)
 
-   res.send(`\nYou are in bidgePlateau9 you see three paths you can go down:\n${rooms[7]}\n${rooms[9]}\n${rooms[5]}\n`)
-    
+    if (player[1] === 'Sword') {
+        res.send(`\nYou are climbing up to the top of the plateau you hear bone chilling howls on the wind and screams for help. As you come over the crest of the mountain you see a peasant boy screaming at the end of a lifted drawbridge in front of a vast castle. There are wolves surrounding him, moving in for the kill. You charge at the wolves and pulling out your sword you drive it into the torso of the largest wolf, it lets out a bone curdling cry and falls to the ground motionless. You hear cheering from the castle and the draw bridge lowers. Out come a group of tired looking peasants, they string up the wolf's corpse by the bridge. Those wolves won't be bothering you any time soon.\n${rooms[7]}\n${rooms[9]}\n${rooms[5]}\n`)
+        player = deathQuestGameFunctions.eventPlacer(player,4)
+    } 
+    else if (player[4][3] === 'drawBridge') {
+        res.send(`\nYou are climbing up to the top of the plateau you hear the gusting of the wind a chill seeps into your bones. You crest the mountain and before you is a disgusting sight, the putrid wolfs corpse is still hanging by the lowered bridge and its covered in flies and maggots, "I guess they really hated those wolves" you think to yourself and carry on.\n${rooms[7]}\n${rooms[9]}\n${rooms[5]}\n`)
+    } 
+    else if (player[1] === 'Bow') {
+        res.send(`\nYou are climbing up to the top of the plateau you hear bone chilling howls on the wind and screams for help. As you come over the crest of the mountain you see a peasant boy screaming at the end of a lifted drawbridge in front of a vast castle. There are wolves surrounding him, moving in for the kill. You charge at the wolves and pulling out your bow and loose an arrow at the largest wolf, your arrow strikes true. But, it's not enough, the pack of wolves instead turn on you and swiftly tear your throat out. The last thing you see is the castle with a tall center tower. It's window seems to be glowing with a supernatural light. Then there was nothing.\n"/deathRoom12"\n`)
+    }
+    else if (player[1] === 'Torch') {
+        res.send(`\nYou are climbing up to the top of the plateau you hear bone chilling howls on the wind and screams for help. As you come over the crest of the mountain you see a peasant boy screaming at the end of a lifted drawbridge in front of a vast castle. There are wolves surrounding him, moving in for the kill. You charge at the wolves and pulling out your torch and wave the flames in their faces, for a moment it looks like they might back of, alas, just for a moment. But, The pack of wolves instead turn on you and swiftly tear your throat out. As you lay on the cliff edge you can see down into the swamp, theres a small hut down there with some smoke coming out of the chimney. Then there was nothing.\n"/deathRoom12"\n`)
+    }
 }) 
 
 router.get('/castle10', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 10)
     
-    res.send(`\nYou are in castle10 you see two paths you can go down:\n${rooms[8]}\n${rooms[10]}\n`)
+    res.send(`\nYou enter the castle, there are dozens of people all around, some are clapping, others are crying, both with joy and sadness. you go up to the closest woman and ask what is going on here? she says "Of course, you don't know yet, you may have saved the boy but now you are trapped here on this land for eternity. At the top of this castle sit the Dark Lord of Death and Time. he made a deal with the Necromancer down in the caves 10 000 years ago to lock us all in this time loop forever. In fact you have been trapped here this whole time I've seen you kill those wolves and save that boy countless times over the generations. You always come into the castle victorious full of hope and determination, then you travel to the highest tower and are never seen again. But, you always come back, sometimes its the next day, sometimes hundreds of years but you always come back" she sighs. "I guess you better be off now the Dark Lord of Death and Time is waiting for you" You walk away your head swimming with what you've just been told.\n${rooms[8]}\n${rooms[10]}\n`)
     
 }) 
 
 router.get('/bigBaddie11', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 11)
 
-    res.send(`\nYou are in bigBaddie11 you WIN, walk home down:\n${rooms[9]}\n`)
-    
+    if (player[3] === 'Golden Key') {
+        res.send(`\nYou walk through the castle, you know what you must do, you walk straight to the stairs. Suddenly it's all coming back to you the countless times you've done this before and every time failure. You are nearing the top of the tower. You can feel the countless deaths before you and after you. But, you know what must be done. You reach the door and pull out the key and begin to put the key into the lock. """NNNOOOO""" You hear a thousand of your voices yelling. You take the key and throw it out the window and kick the tower door in and see on the other side..........\n`)
+    }
+    else {
+        res.send(`\nYou walk through the castle, you know what you must do, you walk straight to the stairs. As you walk up the stairs an insidious feeling is building in your chest. You can't do this. You're not ready. You aren't strong enough, You aren't wise enough, You aren't brave enough. You reach the tower door in front of you and see a golden key hole, "WHY DIDN"T YOU GET THE KEY" you think to yourself, but you go forward. As you press your hand on the door to enter a stream of intense self loathing flows into you. "YOU CAN'T DO IT", "YOU'LL NEVER BE GOOD ENOUGH". To your left the tower window looks so inviting, you dive out the window. You fall for a long time before you smash on the rocks below.\n/deathRoom12`)
+    }
 }) 
 
 router.get('/deathRoom12', (req, res) => {
