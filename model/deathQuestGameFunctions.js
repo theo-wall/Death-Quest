@@ -15,7 +15,7 @@ let player
 let gameMap
 let toolIndex = ['Sword', 'Bow', 'Torch']
 let itemIndex = ['Ruby', 'Golden Key']
-let eventIndex = ['necroDoor', 'witchHutMelt', 'drawBridge', 'bigBaddie']
+let eventIndex = ['necroDoor', 'slimeBridge', 'witchHutMelt', 'drawBridge']
 
 function startGame() {
     

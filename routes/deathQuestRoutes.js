@@ -88,7 +88,8 @@ router.get('/windingPath3', (req, res) => {
 router.get('/crypt4', (req, res) => {
     if (player[4][0] === 'necroDoor') {
         res.send(`
-            You are in crypt4, the necromancer is no where to be found, I guess he took that personally. travel back to ${rooms[2]} and continue your adventure.
+            You are in crypt4, the necromancer is no where to be found, I guess he took that personally. travel back to 
+            ${rooms[2]} and continue your adventure.
         `)
     }
     else {
@@ -134,20 +135,58 @@ router.get('/swamp5', (req, res) => {
 }) 
 
 router.get('/slimePuddles6', (req, res) => {
-    res.send(`You are in slimePuddles6 you see four paths you can go down:
-    ${rooms[4]}
-    ${rooms[8]}
-    ${rooms[6]}
-    ${rooms[2]}
-    `)
-    player = deathQuestGameFunctions.roomChanger(player, 6)
+    
+    if (player[1] === 'Bow') {
+        res.send(`You are in slimePuddles6, you follow the board walk into the center of the vast swamp. 
+        you see four paths travelling away from you but one has a draw bridge that is raised blocking your way. 
+        You deftly shoot the mechanism with your bow and the bridge comes crashing down. you can go down:
+        ${rooms[4]}
+        ${rooms[8]}
+        ${rooms[6]}
+        ${rooms[2]}
+        `)
+        player = deathQuestGameFunctions.eventPlacer(player, 2)
+        player = deathQuestGameFunctions.roomChanger(player, 6)
+    } else if (player[4][1] === 'slimeBride') {
+        res.send(`You are in slimePuddles6, ou follow the board walk into the center of the vast swamp. 
+        you see four paths travelling away from you but one has a draw bridge its mechanism has been pierced by your arrow 
+        and the drawbridge is down. you can go down:
+        ${rooms[4]}
+        ${rooms[8]}
+        ${rooms[6]}
+        ${rooms[2]}
+        `)
+    } else if (player[4][1] === 'noEvent') {
+        res.send(`You are in slimePuddles6, you follow the board walk into the center of the vast swamp. 
+        you see four paths travelling away from you but one has a draw bridge that is raised blocking your way.
+        you can go down:
+        ${rooms[4]}
+        ${rooms[8]}
+        ${rooms[2]}
+        `)
+    }
 }) 
 
 router.get('/witchHut7', (req, res) => {
-    res.send(`You are in witchHut7 you see one path you can go down:
-    ${rooms[5]}
-    `)
-    player = deathQuestGameFunctions.roomChanger(player, 7)
+
+    if (player[2] === 'Ruby') {
+
+        res.send(`You are in witchHut7 You see a small hut in the distance, as you walk up to the door a strong scent of sulfer
+        hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter. Inside you see
+        a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in my humble abode?".
+        Your legs begin to walk over to her, you are unable to stop yourself. "Aaaaah whats this I'm smelling now? I think you have something
+        of mine that the filthy necromancer stole from me, give it here yound lad": give it to her "/witchGive" say you are going to keep it "/witchDie"
+        ${rooms[5]}
+        `)
+        player = deathQuestGameFunctions.roomChanger(player, 7)
+    } else {
+        res.send(`You are in witchHut7 You see a small hut in the distance, as you walk up to the door a strong scent of sulfer
+        hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter. Inside you see
+        a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in my humble abode?". 
+        Your legs begin to walk over to her, you are unable to stop yourself. She takes a looooong sniff and says more to herself, you'll go 
+        great in the evening stew. You yell, unhand me you filthy devil, I'm out of here /witchDie`)
+        player = deathQuestGameFunctions.roomChanger(player, 7)
+    }
 }) 
 
 router.get('/cliffSide8', (req, res) => {
@@ -188,6 +227,24 @@ router.get('/deathRoom12', (req, res) => {
     `)
     player = deathQuestGameFunctions.roomChanger(player, 1)
 }) 
+
+router.get('/witchGive', (req, res) => {
+    res.send(`You hand her the gem and she eats it like a apple, she begins glowing red hot and the hut begins 
+    to melt around you. You turn around and run for your life. /slimePuddles6
+    `)
+    player = deathQuestGameFunctions.eventPlacer(player, 3)
+    player = deathQuestGameFunctions.roomChanger(player, 6)
+
+}) 
+
+router.get('/witchDie', (req, res) => {
+    res.send(`she cackels and says "like you have any choice dear laddy", an unseen force compels you to give her the gem,
+    you turn around and dive headfirst into the cauldron. Your death is long and unpleasant.
+    ${'start1a'}
+    `)
+    player = deathQuestGameFunctions.roomChanger(player, 1)
+}) 
+
 
 router.get('/4', (req, res) => {
     res.json(deathQuestGameFunctions.listRooms())
