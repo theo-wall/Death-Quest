@@ -1,5 +1,6 @@
 const deathQuestGameFunctions = require('../model/deathQuestGameFunctions')
 
+const path = require('path');
 const express = require('express')
 const { generateRandNum } = require('../model/deathQuestGameFunctions')
 const router = express.Router()
@@ -14,15 +15,15 @@ let player = []
 // 
 
 router.get('/', (req, res) => {
-
-    res.send(`\nWelcome to Death Quest!\nYou are trying to kill the big baddie!\ntry not to die! but it might not be as bad as you think...\nhehehe "/startGame" to continue\n`)
-})
+    res.sendFile(path.join(__dirname,'../html/index.html'));
+    // res.send(`\nWelcome to Death Quest!\nYou are trying to kill the big baddie!\ntry not to die! but it might not be as bad as you think...\nhehehe "/startGame" to continue\n`)
+  })
 
 router.get('/startGame', (req, res) => {
-    
+    res.sendFile(path.join(__dirname, '../html/startGame.html'));
     player = deathQuestGameFunctions.startGame()
     
-    res.send('\nYou become consious in a world of darkness and pain do you?\n1)"/start1a" Open your eyes.\n2)"/resetGame" Drift off into sleep.\n')
+    // res.send('\nYou become consious in a world of darkness and pain do you?\n1)"/start1a" Open your eyes.\n2)"/resetGame" Drift off into sleep.\n')
     console.log(player)
 })
 
