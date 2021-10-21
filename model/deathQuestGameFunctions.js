@@ -17,6 +17,10 @@ let toolIndex = ['Sword', 'Bow', 'Torch']
 let itemIndex = ['Ruby', 'Golden Key']
 let eventIndex = ['necroDoor', 'slimeBridge', 'witchHutMelt', 'drawBridge']
 
+// 
+// Initializes game, resets all player tools and events
+// 
+
 function startGame() {
     
     gameMap = ['noEvent', 'noEvent', 'noEvent', 'noEvent']
@@ -25,12 +29,21 @@ function startGame() {
     return player 
 }
 
+
+// 
+//  Resets game, pretty much the same as startgame, might delete
+// 
+
 function resetGame() {
     
     gameMap = ['event1', 'event2', 'event3', 'event4']
     player = [rooms[0], 'noTool', 'noItem1', 'noItem2', gameMap]
     
 }
+
+// 
+//changes the room that the player is in, want to add cheat detection to it so you cant go to rooms that you dont have a path to. 
+// 
 
 function roomChanger(player,roomNumber) {
 
@@ -39,11 +52,20 @@ function roomChanger(player,roomNumber) {
     return player
 }
 
+// 
+// gives the player the specified tool: 0) Sword, 1) Bow, 2) Torch 
+// 
+
 function giveTool(index) {
     let tool = toolIndex[index]
     console.log(tool)
     return tool 
 } 
+
+// 
+// Gives the player the specified Item: 1) Ruby, 2) Golden Key.
+// I want to change this to be the same as give tool. 
+// 
 
 function giveItem (player,item) {
     if (item === 1) {
@@ -55,6 +77,10 @@ function giveItem (player,item) {
         return player
     }
 }
+
+// 
+// Places a event on the character array to remember if its happened or not
+// 
 
 function eventPlacer(player,event) {
     if (event === 1) {
@@ -75,7 +101,10 @@ function eventPlacer(player,event) {
     }
 }
 
+// 
 // generates random number from 0 to number specified(num)
+// 
+
 function generateRandNum(num) {
    return Math.floor(Math.random() * num)
 }

@@ -9,6 +9,10 @@ let rooms = ['/start1', '/caves2', '/windingPath3', '/crypt4', '/swamp5', '/slim
 let player = []
 
 
+// 
+// starting game screen
+// 
+
 router.get('/', (req, res) => {
 
     res.send(`\nWelcome to Death Quest!\nYou are trying to kill the big baddie!\ntry not to die! but it might not be as bad as you think...\nhehehe "/startGame" to continue\n`)
