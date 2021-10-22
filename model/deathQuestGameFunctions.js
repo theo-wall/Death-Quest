@@ -13,7 +13,7 @@ let rooms =
 
 let player
 let gameMap
-let toolIndex = ['Sword', 'Bow', 'Torch']
+let toolIndex = ['Sword', 'Bow', 'Torch','noTool']
 let itemIndex = ['Ruby', 'Golden Key']
 let eventIndex = ['necroDoor', 'slimeBridge', 'witchHutMelt', 'drawBridge']
 

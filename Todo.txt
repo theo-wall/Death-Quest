@@ -4,6 +4,7 @@ Bugs
 - you dont have to go to listed locations from current room
 - no win state at end of game
 - tool selection doesnt quite work properly with restart mechanic
+- make proper reset game
 
 
 Features:

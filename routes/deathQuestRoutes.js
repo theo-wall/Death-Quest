@@ -28,33 +28,49 @@ router.get('/startGame', (req, res) => {
 })
 
 router.get('/resetGame', (req, res) => {
-  
+    res.sendFile(path.join(__dirname, '../html/resetGame.html'));
     player = deathQuestGameFunctions.resetGame()
     
-    res.send('\nYou close your eyes and fade away in one last act of defiance\n')
+    // res.send('\nYou close your eyes and fade away in one last act of defiance\n')
     console.log(player)
 })
 
 router.get('/start1a', (req, res) => {    
+    res.sendFile(path.join(__dirname, '../html/start1a.html'));
     player = deathQuestGameFunctions.roomChanger(player,1)
     
-    res.send(`\nYou step out of the ring and you see a "Sword", a 'Bow', and a 'Torch' laying on the ground before you, you pick it one of them up. The other two fade away in a puff of smoke. You are in start1 you see three paths you can go down:\n${rooms[1]}\n${rooms[4]}\n${rooms[7]}\n`)
+    // res.send(`\nYou step out of the ring and you see a "Sword", a 'Bow', and a 'Torch' laying on the ground before you, you pick it one of them up.\n"/start1"\n`)
+
 
     let tool = parseInt(req.query.tool)
+
+    if (tool !== undefined) {
+        console.log(tool)
+        player[1] = deathQuestGameFunctions.giveTool(tool)
+    }
+    
+})
+
+router.get('/start1b', (req, res) => {
+    let tool = req.query.tool
+    res.sendFile(path.join(__dirname, '../html/start1b.html'));
+    player = deathQuestGameFunctions.roomChanger(player, 1)
+
+    
     console.log(tool)
     
     player[1] = deathQuestGameFunctions.giveTool(tool)
     
+
+    // res.send(`\nThe two other tools fade away into smoke. Maybe in another lifetime you'll see them again, who knows. You are in start1 you see three paths you can go down:\n${rooms[1]}\n${rooms[4]}\n${rooms[7]}\n`)
 })
 
 router.get('/start1', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 1)
 
     res.send(`\nYou are in start1 you see three paths you can go down:\n${rooms[1]}\n${rooms[4]}\n${rooms[7]}\n`)
-
-    
-
 })
+
 
 router.get('/caves2', (req, res) => {
    player = deathQuestGameFunctions.roomChanger(player, 2)
