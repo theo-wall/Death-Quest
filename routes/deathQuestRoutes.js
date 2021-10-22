@@ -42,21 +42,27 @@ router.get('/start1a', (req, res) => {
     // res.send(`\nYou step out of the ring and you see a "Sword", a 'Bow', and a 'Torch' laying on the ground before you, you pick it one of them up.\n"/start1"\n`)
 
 
+    // let tool = parseInt(req.query.tool)
+
+    // if (tool !== undefined) {
+    //     console.log(tool)
+    //     player[1] = deathQuestGameFunctions.giveTool(tool)
+    // }
+    
+})
+
+router.get('/start1b', (req, res) => {
+    
+    res.sendFile(path.join(__dirname, '../html/start1b.html'));
+    player = deathQuestGameFunctions.roomChanger(player, 1)
+
     let tool = parseInt(req.query.tool)
 
     if (tool !== undefined) {
         console.log(tool)
         player[1] = deathQuestGameFunctions.giveTool(tool)
     }
-    
-})
 
-router.get('/start1b', (req, res) => {
-    let tool = req.query.tool
-    res.sendFile(path.join(__dirname, '../html/start1b.html'));
-    player = deathQuestGameFunctions.roomChanger(player, 1)
-
-    
     console.log(tool)
     
     player[1] = deathQuestGameFunctions.giveTool(tool)
@@ -66,20 +72,24 @@ router.get('/start1b', (req, res) => {
 })
 
 router.get('/start1', (req, res) => {
+    res.sendFile(path.join(__dirname, '../html/start1.html'));
     player = deathQuestGameFunctions.roomChanger(player, 1)
 
-    res.send(`\nYou are in start1 you see three paths you can go down:\n${rooms[1]}\n${rooms[4]}\n${rooms[7]}\n`)
+    // res.send(`\nYou are in start1 you see three paths you can go down:\n${rooms[1]}\n${rooms[4]}\n${rooms[7]}\n`)
 })
 
 
 router.get('/caves2', (req, res) => {
+    
    player = deathQuestGameFunctions.roomChanger(player, 2)
 
    if (player[1] === 'Torch') {
-        res.send(`\nYou are in caves2, you see two paths you can go down your torch lights the way ahead of you:\n${rooms[0]}\n${rooms[2]}\n`) 
+        res.sendFile(path.join(__dirname, '../html/caves2.html'));
+        // res.send(`\nYou are in caves2, you see two paths you can go down your torch lights the way ahead of you:\n${rooms[0]}\n${rooms[2]}\n`) 
     } 
     else {
-        res.send(`\nYou are in ${player[0]} cant see anything around you, suddenly your foot is falling, you're falling, death comes siftly:\n${rooms[11]}\n`)
+        res.sendFile(path.join(__dirname, '../html/caves2Death.html'));
+        // res.send(`\nYou are in ${player[0]} cant see anything around you, suddenly your foot is falling, you're falling, death comes siftly:\n${rooms[11]}\n`)
     }
 }) 
 
@@ -87,10 +97,12 @@ router.get('/windingPath3', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 3)
 
     if (player[1] === 'Torch') {
-        res.send(`\nYou are in windingPath3, your torch lights the way you see three paths you can go down:\n${rooms[1]}\n${rooms[5]}\n${rooms[3]}\n`)
+        res.sendFile(path.join(__dirname, '../html/windingPath3.html'));
+        // res.send(`\nYou are in windingPath3, your torch lights the way you see three paths you can go down:\n${rooms[1]}\n${rooms[5]}\n${rooms[3]}\n`)
            }
     else {
-        res.send(`\nYou are in ${player[0]} cant see anything around you, suddenly your foot is falling, you're falling, death comes siftly:\n${rooms[11]}\n`)
+        res.sendFile(path.join(__dirname, '../html/caves2Death.html'));
+        // res.send(`\nYou are in ${player[0]} cant see anything around you, suddenly your foot is falling, you're falling, death comes siftly:\n${rooms[11]}\n`)
     }
 
 }) 
@@ -99,10 +111,12 @@ router.get('/crypt4', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 4)
     
     if (player[4][0] === 'necroDoor') {
-        res.send(`\nYou are in crypt4, the necromancer is no where to be found, I guess he took that personally. travel back to ${rooms[2]} and continue your adventure.\n`)
+        res.sendFile(path.join(__dirname, '../html/crypt4NecroDoor.html'));
+        // res.send(`\nYou are in crypt4, the necromancer is no where to be found, I guess he took that personally. travel back to ${rooms[2]} and continue your adventure.\n`)
     }
     else {
-        res.send(`\nYou are in crypt4, In front of you is a necromancer holding three cups, he asks you if you would like to play a game a wager of your life for a precious ruby. Or you can run away like a sissy:\n${rooms[2]}\n${rooms[12]}\n`)
+        res.sendFile(path.join(__dirname, '../html/crpyt4.html'));
+        // res.send(`\nYou are in crypt4, In front of you is a necromancer holding three cups, he asks you if you would like to play a game a wager of your life for a precious ruby. Or you can run away like a sissy:\n${rooms[2]}\n${rooms[12]}\n`)
     }
 })
 
@@ -113,12 +127,14 @@ router.get('/necromancerGame13', (req, res) => {
     console.log(winGame)
 
     if (winGame <= 5) {
-        res.send(`\nYou won the necromancers game! continue on with your adventure \n"/crypt4"\n`)
+        res.sendFile(path.join(__dirname, '../html/necromancerGame13Win.html'));
+        // res.send(`\nYou won the necromancers game! continue on with your adventure \n"/crypt4"\n`)
         player = deathQuestGameFunctions.giveItem(player,1)
         player = deathQuestGameFunctions.eventPlacer(player,1)
     }
     else if (winGame > 5) {
-        res.send(`\nYou lost the necromancers game, your soul is forfeit \n"/deathRoom12"\n`)
+        res.sendFile(path.join(__dirname, '../html/necromancerGame13Lose.html')); 
+        // res.send(`\nYou lost the necromancers game, your soul is forfeit \n"/deathRoom12"\n`)
     } 
 })
 
@@ -207,7 +223,8 @@ router.get('/bigBaddie11', (req, res) => {
 router.get('/deathRoom12', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 1)
 
-    res.send(`\nYou are dead, start from the beginning:\n${'start1a'}\n`)
+    res.sendFile(path.join(__dirname, '../html/deathRoom12.html'));
+    // res.send(`\nYou are dead, start from the beginning:\n${'start1a'}\n`)
     
 }) 
 
