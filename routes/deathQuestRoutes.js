@@ -115,7 +115,7 @@ router.get('/crypt4', (req, res) => {
         // res.send(`\nYou are in crypt4, the necromancer is no where to be found, I guess he took that personally. travel back to ${rooms[2]} and continue your adventure.\n`)
     }
     else {
-        res.sendFile(path.join(__dirname, '../html/crpyt4.html'));
+        res.sendFile(path.join(__dirname, '../html/crypt4.html'));
         // res.send(`\nYou are in crypt4, In front of you is a necromancer holding three cups, he asks you if you would like to play a game a wager of your life for a precious ruby. Or you can run away like a sissy:\n${rooms[2]}\n${rooms[12]}\n`)
     }
 })
@@ -143,43 +143,53 @@ router.get('/swamp5', (req, res) => {
     let slipCheck = deathQuestGameFunctions.generateRandNum(10)
 
     if (slipCheck <= 5) {
-        res.send(`\nYou are in swamp5, you make your way carefully over the slimey boardwalk, you see two paths you can go down:\n${rooms[0]}\n${rooms[5]}\n`)
+        res.sendFile(path.join(__dirname, '../html/swamp5.html')); 
+        // res.send(`\nYou are in swamp5, you make your way carefully over the slimey boardwalk, you see two paths you can go down:\n${rooms[0]}\n${rooms[5]}\n`)
             } 
     else if (slipCheck > 5) {
-        res.send(`\nYou start to make your way out across the boards, YOU SLIP, you go headfirst into the swamp and drown very inconveniently\n"/deathRoom12"\n`)
+        res.sendFile(path.join(__dirname, '../html/swamp5Slip.html')); 
+        // res.send(`\nYou start to make your way out across the boards, YOU SLIP, you go headfirst into the swamp and drown very inconveniently\n"/deathRoom12"\n`)
     }
 }) 
 
 router.get('/slimePuddles6', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 6)
-
-    if (player[1] === 'Bow') {
+    
+    if (player[4][1] === 'slimeBridge') {
+        res.sendFile(path.join(__dirname, '../html/slimePuddles6Down.html')); 
         
-        res.send(`\nYou are in slimePuddles6, you follow the board walk into the center of the vast swamp. you see four paths travelling away from you but one has a draw bridge that is raised blocking your way. You deftly shoot the mechanism with your bow and the bridge comes crashing down. you can go down:\n${rooms[4]}\n${rooms[8]}\n${rooms[6]}\n${rooms[2]}`)
+        // res.send(`\nYou are in slimePuddles6, you follow the board walk into the center of the vast swamp. you see four paths travelling away from you but one has a draw bridge that is raised blocking your way. You deftly shoot the mechanism with your bow and the bridge comes crashing down. you can go down:\n${rooms[4]}\n${rooms[8]}\n${rooms[6]}\n${rooms[2]}`)
         
         player = deathQuestGameFunctions.eventPlacer(player, 2)
         
-    } else if (player[4][1] === 'slimeBride') {
-        res.send(`\nYou are in slimePuddles6, ou follow the board walk into the center of the vast swamp. you see four paths travelling away from you but one has a draw bridge its mechanism has been pierced by your arrow and the drawbridge is down. you can go down:\n${rooms[4]}\n${rooms[8]}\n${rooms[6]}\n${rooms[2]}\n`)
+    } else if (player[1] === 'Bow') {
+        res.sendFile(path.join(__dirname, '../html/slimePuddles6Bow.html')); 
+        // res.send(`\nYou are in slimePuddles6, ou follow the board walk into the center of the vast swamp. you see four paths travelling away from you but one has a draw bridge its mechanism has been pierced by your arrow and the drawbridge is down. you can go down:\n${rooms[4]}\n${rooms[8]}\n${rooms[6]}\n${rooms[2]}\n`)
     } else if (player[4][1] === 'noEvent') {
-        res.send(`\nYou are in slimePuddles6, you follow the board walk into the center of the vast swamp. you see four paths travelling away from you but one has a draw bridge that is raised blocking your way. you can go down:\n${rooms[4]}\n${rooms[8]}\n${rooms[2]}\n`)
+        res.sendFile(path.join(__dirname, '../html/slimePuddles6up.html')); 
+        // res.send(`\nYou are in slimePuddles6, you follow the board walk into the center of the vast swamp. you see four paths travelling away from you but one has a draw bridge that is raised blocking your way. you can go down:\n${rooms[4]}\n${rooms[8]}\n${rooms[2]}\n`)
     }
 }) 
 
 router.get('/witchHut7', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 7)
-
-    if (player[2] === 'Ruby') {
-
-        res.send(`\nYou are in witchHut7 You see a small hut in the distance, as you walk up to the door a strong scent of sulfer hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter. Inside you see a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in my humble abode?". Your legs begin to walk over to her, you are unable to stop yourself. "Aaaaah whats this I'm smelling now? I think you have something of mine that the filthy necromancer stole from me, give it here yound lad": give it to her \n"/witchGive" say you are going to keep it \n"/witchDie"\n`)
-        
-    } else {
-        res.send(`\nYou are in witchHut7 You see a small hut in the distance, as you walk up to the door a strong scent of sulfer hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter. Inside you see a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in my humble abode?". Your legs begin to walk over to her, you are unable to stop yourself. She takes a looooong sniff and says more to herself, you'll go great in the evening stew. You yell, unhand me you filthy devil, I'm out of here \n/witchDie\n`)
+    if (player[4][2] === 'witchHutMelt') {
+        res.sendFile(path.join(__dirname, '../html/witchHut7Melt.html')); 
+    }
+    else if (player[2] === 'Ruby') {
+        res.sendFile(path.join(__dirname, '../html/witchHut7Ruby.html')); 
+        // res.send(`\nYou are in witchHut7 You see a small hut in the distance, as you walk up to the door a strong scent of sulfer hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter. Inside you see a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in my humble abode?". Your legs begin to walk over to her, you are unable to stop yourself. "Aaaaah whats this I'm smelling now? I think you have something of mine that the filthy necromancer stole from me, give it here yound lad": give it to her \n"/witchGive" say you are going to keep it \n"/witchDie"\n`)
+    } 
+    else if (player[4][2] === 'noEvent'){
+        res.sendFile(path.join(__dirname, '../html/witchHut7NoRuby.html')); 
+        // res.send(`\nYou are in witchHut7 You see a small hut in the distance, as you walk up to the door a strong scent of sulfer hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter. Inside you see a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in my humble abode?". Your legs begin to walk over to her, you are unable to stop yourself. She takes a looooong sniff and says more to herself, you'll go great in the evening stew. You yell, unhand me you filthy devil, I'm out of here \n/witchDie\n`)
     }
 }) 
 
 router.get('/cliffSide8', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 8)
+
+    res.sendFile(path.join(__dirname, '../html/cliffSide8.html')); 
 
     res.send(`\nYou are in cliffSide8 you see two paths you can go down:\n${rooms[0]}\n${rooms[8]}\n`)
 }) 
@@ -231,9 +241,9 @@ router.get('/deathRoom12', (req, res) => {
 router.get('/witchGive', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 6)
     
-    res.send(`\nYou hand her the gem and she eats it like a apple, she begins glowing red hot and the hut begins to melt around you. You turn around and run for your life. on your way past the table you see a shiny gold key, you grab it on your way out \n/slimePuddles6\n`)
+    res.sendFile(path.join(__dirname, '../html/witchGive.html'));
+    // res.send(`\nYou hand her the gem and she eats it like a apple, she begins glowing red hot and the hut begins to melt around you. You turn around and run for your life. on your way past the table you see a shiny gold key, you grab it on your way out \n/slimePuddles6\n`)
     player = deathQuestGameFunctions.eventPlacer(player, 3)
-    
     player = deathQuestGameFunctions.giveItem(player,2)
 
 }) 
@@ -241,13 +251,10 @@ router.get('/witchGive', (req, res) => {
 router.get('/witchDie', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(player, 1)
     
-    res.send(`She cackles and says "like you have any choice dear laddy", an unseen force compels you to give her the gem, you turn around and dive headfirst into the cauldron. Your death is long and unpleasant. \n${'start1a'}\n`)
+    res.sendFile(path.join(__dirname, '../html/witchDie.html'));
+
+    // res.send(`She cackles and says "like you have any choice dear laddy", an unseen force compels you to give her the gem, you turn around and dive headfirst into the cauldron. Your death is long and unpleasant. \n${'start1a'}\n`)
     
 }) 
-
-
-router.get('/4', (req, res) => {
-    res.json(deathQuestGameFunctions.listRooms())
-})
 
 module.exports = router
