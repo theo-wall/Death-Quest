@@ -1,21 +1,27 @@
-let rooms = 
-[['start1'],
-['caves2'],
-['windingPath3'],
-['crypt4'],
-['swamp5'],
-['slimePuddles6'],
-['witchHut7'],
-['cliffSide8'],
-['bridgePlateau9'],
-['castle10'],
-['bigBaddie11']]
+let rooms = [
+    'start1',
+    'caves2',
+    'windingPath3',
+    'crypt4',
+    'swamp5',
+    'slimePuddles6',
+    'witchHut7',
+    'cliffSide8',
+    'bridgePlateau9',
+    'castle10',
+    'bigBaddie11']
 
-let player
-let gameMap
+let player = {
+    location: '',
+    tool: 'noTool',
+    item1: 'noItem1',
+    item2: 'noItem2', 
+    event1: 'noEvent', 
+    event2: 'noEvent', 
+    event3: 'noEvent', 
+    event4: 'noEvent'}
+
 let toolIndex = ['Sword', 'Bow', 'Torch','noTool']
-let itemIndex = ['Ruby', 'Golden Key']
-let eventIndex = ['necroDoor', 'slimeBridge', 'witchHutMelt', 'drawBridge']
 
 // 
 // Initializes game, resets all player tools and events
@@ -23,12 +29,18 @@ let eventIndex = ['necroDoor', 'slimeBridge', 'witchHutMelt', 'drawBridge']
 
 function startGame() {
     
-    gameMap = ['noEvent', 'noEvent', 'noEvent', 'noEvent']
-    player = [rooms[0], 'noTool', 'noItem1', 'noItem2', gameMap,]
-    
-    return player 
+    player = {
+        location: '',
+        tool: 'noTool',
+        item1: 'noItem1',
+        item2: 'noItem2',
+        event1: 'noEvent',
+        event2: 'noEvent',
+        event3: 'noEvent',
+        event4: 'noEvent'
+    }
+        return player 
 }
-
 
 // 
 //  Resets game, pretty much the same as startgame, might delete
@@ -36,8 +48,16 @@ function startGame() {
 
 function resetGame() {
     
-    gameMap = ['event1', 'event2', 'event3', 'event4']
-    player = [rooms[0], 'noTool', 'noItem1', 'noItem2', gameMap]
+    player = {
+        location: '',
+        tool: 'noTool',
+        item1: 'noItem1',
+        item2: 'noItem2',
+        event1: 'noEvent',
+        event2: 'noEvent',
+        event3: 'noEvent',
+        event4: 'noEvent'
+    }
     
 }
 
@@ -45,9 +65,11 @@ function resetGame() {
 //changes the room that the player is in, want to add cheat detection to it so you cant go to rooms that you dont have a path to. 
 // 
 
-function roomChanger(player,roomNumber) {
+function roomChanger(roomNumber) {
 
-    player[0] = rooms[roomNumber-1]
+    console.log(rooms)
+    
+    player.location = rooms[roomNumber-1]
     console.log(player)
     return player
 }
@@ -67,13 +89,13 @@ function giveTool(index) {
 // I want to change this to be the same as give tool. 
 // 
 
-function giveItem (player,item) {
+function giveItem (item) {
     if (item === 1) {
-        player[2] = itemIndex[0]
+        player.item1 = 'Ruby'
         return player
     }
     else if (item === 2) {
-        player[3] = itemIndex[1]
+        player.item2 = 'Golden Key'
         return player
     }
 }
@@ -82,21 +104,21 @@ function giveItem (player,item) {
 // Places a event on the character array to remember if its happened or not
 // 
 
-function eventPlacer(player,event) {
+function eventPlacer(event) {
     if (event === 1) {
-        player[4][0] = eventIndex[0]
+        player.event1 = 'necroDoor'
         return player
     }
     else if (event === 2) {
-        player[4][1] = eventIndex[1]
+        player.event2 = 'slimeBridge'
         return player
     }
     else if (event === 3) {
-        player[4][2] = eventIndex[2]
+        player.event3 = 'witchHutMelt'
         return player
     }
     else if (event === 4) {
-        player[4][3] = eventIndex[3]
+        player.event4 = 'drawBridge'
         return player
     }
 }
