@@ -5,23 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="routes/deathQuestRoutes.js"></script>
-    <title>Document</title>
+    <title>Death Quest</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"
+      rel="stylesheet">
   </head>
 
   <body>
 
-    <div>
-      Your torch lights the way down the winding path, you see three paths you can go down:
+    <div class="storyText">
+      <p id="flavour">
+        Your torch lights the way down the winding path, you see three paths you can go down:
+      </p>
     </div>
 
-    <a href="http://Localhost:3000/caves2">Travel To The Caves</a>
-    <a href="http://Localhost:3000/slimePuddles6">Travel To The Slime Puddles</a>
-    <a href="http://Localhost:3000/crypt4">Travel To The Crypt</a>
-
-    <!-- <form method="get" action="/startGame">
-  <button type="submit">Start Game</button>
-</form> -->
+    <nav>
+      <ul>
+        <li id='choiceList'><a href="http://Localhost:3000/caves2">Travel To The Caves</a></li>
+        <li id='choiceList'><a href="http://Localhost:3000/slimePuddles6">Travel To The Slime Puddles</a></li>
+        <li id='choiceList'><a href="http://Localhost:3000/crypt4">Travel To The Crypt</a></li>
+      </ul>
+    </nav>
 
   </body>
 
 </html>
+

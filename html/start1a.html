@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
 
-  <div>You step out of the ring and you see a "Sword", a 'Bow', and a 'Torch' laying on the ground before you, you pick it one
-  of them up.
-  </div>
-  
-<a href="http://localhost:3000/start1b?tool=0">Pick Up Sword</a>
-<a href="http://Localhost:3000/start1b?tool=1">Pick Up Bow</a>
-<a href="http://Localhost:3000/start1b?tool=2">Pick Up Torch</a>
-<a href="http://Localhost:3000/start1b?tool=3">Pick Up Nothing</a>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="routes/deathQuestRoutes.js"></script>
+    <title>Death Quest</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"
+      rel="stylesheet">
+  </head>
 
+  <body>
 
+    <div class="storyText">
+      <p id="flavour">
+        You step out of the ring and you see a "Sword", a 'Bow', and a 'Torch' laying on the ground before you, you pick it one
+        of them up:
+      </p>
+    </div>
 
-</body>
+    <nav>
+      <ul>
+        <li id='choiceList'><a href="http://localhost:3000/start1b?tool=0">Pick Up Sword</a></li>
+        <li id='choiceList'><a href="http://Localhost:3000/start1b?tool=1">Pick Up Bow</a></li>
+        <li id='choiceList'><a href="http://Localhost:3000/start1b?tool=2">Pick Up Torch</a></li>
+        <li id='choiceList'><a href="http://Localhost:3000/start1b?tool=3">Pick Up Nothing</a></li>
+      </ul>
+    </nav>
+
+  </body>
+
 </html>

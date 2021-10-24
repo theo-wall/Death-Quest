@@ -4,18 +4,29 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="routes/deathQuestRoutes.js"></script>
+    <title>Death Quest</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"
+      rel="stylesheet">
   </head>
 
   <body>
 
-    <div>
-      You are in cliffSide8 you see two paths you can go down:
+    <div class="storyText">
+      <p id="flavour">
+        You are in cliffSide8 you see two paths you can go down:
+      </p>
     </div>
 
-    <a href="http://localhost:3000/start1">Travel To The Start</a>
-    <a href="http://Localhost:3000/bridgePlateau9">Travel To The Mountian Plateau</a>
-    
+    <nav>
+      <ul>
+        <li id='choiceList'><a href="http://localhost:3000/start1">Travel To The Start</a></li>
+        <li id='choiceList'><a href="http://Localhost:3000/bridgePlateau9">Travel To The Mountian Plateau</a></li>
+      </ul>
+    </nav>
 
   </body>
 

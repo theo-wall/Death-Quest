@@ -5,22 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="routes/deathQuestRoutes.js"></script>
-    <title>Document</title>
+    <title>Death Quest</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"
+      rel="stylesheet">
   </head>
 
   <body>
 
-    <div>
-        You see a small hut in the distance, as you walk up to the door a strong scent of
+    <div class="storyText">
+      <p id="flavour">
+        You see a small hut in the distance, as you walk up to the door a strong scent of 
         sulfer hits your nose, you wretch but continue on. Right as you get to the door it slowly swings open and you enter.
         Inside you see a witch stirring a large caldron, she says to you "My my my what a tastey specimen, what are you doing in
         my humble abode?". Your legs begin to walk over to her, you are unable to stop yourself. "Aaaaah whats this I'm smelling
-        now? I think you have something of mine that the filthy necromancer stole from me, give it here young lad": 
+        now? I think you have something of mine that the filthy necromancer stole from me, give it here young lad":
+      </p>
     </div>
 
-    <a href="http://Localhost:3000/witchGive">Give It To Her</a>
-    <a href="http://Localhost:3000/witchDie">Say You're Keeping It For Yourself</a>
-    
+    <nav>
+      <ul>
+        <li id='choiceList'><a href="http://Localhost:3000/witchGive">Give It To Her</a></li>
+        <li id='choiceList'><a href="http://Localhost:3000/witchDie">Say You're Keeping It For Yourself</a></li>
+      </ul>
+    </nav>
 
   </body>
 

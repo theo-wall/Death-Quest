@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
 
-    <div>
-      You are in start1 you see three paths you can go down:
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="routes/deathQuestRoutes.js"></script>
+    <title>Death Quest</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"
+      rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="storyText">
+      <p id="flavour">
+        You are in start1 you see three paths you can go down:
+      </p>
     </div>
-    
-    <a href="http://localhost:3000/caves2">Travel To The Caves</a>
-    <a href="http://Localhost:3000/swamp5">Travel To The Swamps</a>
-    <a href="http://Localhost:3000/cliffSide8">Travel To The Cliff Side</a>
 
-</body>
+    <nav>
+      <ul>
+        <li id='choiceList'><a href="http://localhost:3000/caves2">Travel To The Caves</a></li>
+        <li id='choiceList'><a href="http://Localhost:3000/swamp5">Travel To The Swamps</a></li>
+        <li id='choiceList'><a href="http://Localhost:3000/cliffSide8">Travel To The Cliff Side</a></li>
+      </ul>
+    </nav>
+
+  </body>
+
 </html>

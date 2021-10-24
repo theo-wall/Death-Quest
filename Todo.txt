@@ -1,9 +1,7 @@
 Bugs
 - All levels are accessable by URL
-- you can skip startGame()
 - you dont have to go to listed locations from current room
 - no win state at end of game
-- tool selection doesnt quite work properly with restart mechanic
 - make proper reset game
 
 
@@ -11,11 +9,9 @@ Features:
 - add necromancer game
 - add win condition
 - add final boss fight
-- change player to object so that you can save to database
 - finish story sections in all zones
-- make html front end with text and buttons
 - html front end map
-- 
+- add question text when character is going to die
 
  
 
