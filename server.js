@@ -1,14 +1,14 @@
 const express = require('express')
-const deathQuestRouter = require('./routes/deathQuestRoutes')
+const deathQuestRouter = require('./public/deathQuestRoutes')
 
 
 
 const app = express()
 const port = 3000
 
-
+app.use(express.static('public'));
 app.use(deathQuestRouter)
-app.use(express.static(__dirname + '/css'));
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
