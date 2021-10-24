@@ -1,0 +1,27 @@
+body {
+  background-color: black;
+  font-family: 'DotGothic16', sans-serif;
+  font-size: 32px;
+}
+a:visited {
+  color: white;
+}
+
+a {
+  color: wheat;
+}
+
+#flavour {
+  color: white;
+  font-size: larger;
+  padding: 10px
+
+  ;
+}
+
+ul {
+	list-style-type: none;
+	padding: 20;
+  margin: 0;
+  color: bisque;
+}
