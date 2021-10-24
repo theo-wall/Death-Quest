@@ -5,7 +5,6 @@ const express = require('express')
 const { generateRandNum } = require('../model/deathQuestGameFunctions')
 const router = express.Router()
 
-
 // let player = []
 
 let player = {
