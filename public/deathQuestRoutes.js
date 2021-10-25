@@ -1,7 +1,8 @@
 const deathQuestGameFunctions = require('./deathQuestGameFunctions')
 
 const path = require('path');
-const express = require('express')
+const express = require('express');
+const { counter } = require('./deathQuestGameFunctions');
 const router = express.Router()
 
 // let player = []
@@ -99,9 +100,14 @@ router.get('/crypt4', (req, res) => {
 })
 
 router.get('/necromancerGame13', (req, res) => {
- 
-    res.sendFile(path.join(__dirname, '/html/necromancerGame13.html'));
 
+   
+    if (counter() <= 5) {
+    res.sendFile(path.join(__dirname, '/html/necromancerGame13.html'));
+        }
+        else {
+            
+        }
     // let gameChoice = parseInt(req.query.tool)
 
     // console.log(gameChoice)

@@ -61,6 +61,8 @@ function resetGame() {
     
 }
 
+let gameCount = 0
+
 // 
 //changes the room that the player is in, want to add cheat detection to it so you cant go to rooms that you dont have a path to. 
 // 
@@ -131,6 +133,11 @@ function generateRandNum(num) {
    return Math.floor(Math.random() * num)
 }
 
+function counter() {
+    gameCount++;
+    console.log(gameCount);
+    return gameCount
+}
 // 
 // generates dice roll object for dice game
 // 
@@ -156,6 +163,7 @@ module.exports = {
     giveTool,
     giveItem,
     eventPlacer,
-    generateRandNum
+    generateRandNum,
+    counter
     
 }
