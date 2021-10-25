@@ -131,6 +131,24 @@ function generateRandNum(num) {
    return Math.floor(Math.random() * num)
 }
 
+// 
+// generates dice roll object for dice game
+// 
+
+// function borelRoll() {
+//     let roll = {
+//         sixD1: generateRandNum(6),
+//         sixD2: generateRandNum(6),
+//         sixD3: generateRandNum(6),
+//         sixD4: generateRandNum(6),
+//         tenD1: generateRandNum(10),
+//         thirtyD1: generateRandNum(30)
+//     }
+//     console.log(roll)
+    
+//     return roll
+// }
+
 module.exports = {
     startGame,
     resetGame,
@@ -139,4 +157,5 @@ module.exports = {
     giveItem,
     eventPlacer,
     generateRandNum
+    
 }

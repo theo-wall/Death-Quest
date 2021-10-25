@@ -99,19 +99,34 @@ router.get('/crypt4', (req, res) => {
 })
 
 router.get('/necromancerGame13', (req, res) => {
-   
-    
-    let winGame = deathQuestGameFunctions.generateRandNum(10)
-    console.log(winGame)
+ 
+    res.sendFile(path.join(__dirname, '/html/necromancerGame13.html'));
 
-    if (winGame <= 5) {
-        res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'));
-        player = deathQuestGameFunctions.giveItem(1)
-        player = deathQuestGameFunctions.eventPlacer(1)
-    }
-    else if (winGame > 5) {
-        res.sendFile(path.join(__dirname, '/html/necromancerGame13Lose.html')); 
-    } 
+    // let gameChoice = parseInt(req.query.tool)
+
+    // console.log(gameChoice)
+    
+    // if (gameChoice === 0) {
+
+    // }
+    // else if (gameChoice === false) {
+
+    // }
+    // else if (gameChoice === true) {
+
+    // }
+
+    // let winGame = deathQuestGameFunctions.generateRandNum(10)
+    // console.log(winGame)
+
+    // if (winGame <= 5) {
+    //     res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'));
+    //     player = deathQuestGameFunctions.giveItem(1)
+    //     player = deathQuestGameFunctions.eventPlacer(1)
+    // }
+    // else if (winGame > 5) {
+    //     res.sendFile(path.join(__dirname, '/html/necromancerGame13Lose.html')); 
+    // } 
 })
 
 router.get('/swamp5', (req, res) => {
