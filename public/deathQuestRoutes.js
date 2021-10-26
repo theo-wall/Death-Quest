@@ -66,26 +66,39 @@ router.get('/start1', (req, res) => {
 
 router.get('/caves2', (req, res) => {
     
-   player = deathQuestGameFunctions.roomChanger(2)
+    let darkCheck = parseInt(req.query.darkCheck) 
+    player = deathQuestGameFunctions.roomChanger(2)
 
-   if (player.tool === 'Torch') {
-        res.sendFile(path.join(__dirname, '/html/caves2.html'));
+    if (darkCheck === 1) {
+        res.sendFile(path.join(__dirname, '/html/darkWarningStart.html'));
     } 
-    else {
-        res.sendFile(path.join(__dirname, '/html/caves2Death.html'));
+    else if (darkCheck === 2) {
+            if (player.tool === 'Torch') {
+            res.sendFile(path.join(__dirname, '/html/caves2.html'));
+        } 
+        else {
+            res.sendFile(path.join(__dirname, '/html/caves2Death.html'));
+        } 
     }
+
+
 }) 
 
 router.get('/windingPath3', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(3)
-
-    if (player.tool === 'Torch') {
-        res.sendFile(path.join(__dirname, '/html/windingPath3.html'));
-           }
-    else {
-        res.sendFile(path.join(__dirname, '/html/caves2Death.html'));
+    let darkCheck = parseInt(req.query.darkCheck) 
+    
+    if (darkCheck === 1) {
+        res.sendFile(path.join(__dirname, '/html/darkWarningPuddles.html'));
     }
-
+    else if (darkCheck === 2) {
+        if (player.tool === 'Torch') {
+            res.sendFile(path.join(__dirname, '/html/windingPath3.html'));
+        }
+        else {
+            res.sendFile(path.join(__dirname, '/html/caves2Death.html'));
+        }
+    }
 }) 
 
 router.get('/crypt4', (req, res) => {
@@ -102,12 +115,12 @@ router.get('/crypt4', (req, res) => {
 router.get('/necromancerGame13', (req, res) => {
 
    
-    if (counter() <= 5) {
-    res.sendFile(path.join(__dirname, '/html/necromancerGame13.html'));
-        }
-        else {
+    // if (counter() <= 5) {
+    // res.sendFile(path.join(__dirname, '/html/necromancerGame13.html'));
+    //     }
+    //     else {
             
-        }
+    //     }
     // let gameChoice = parseInt(req.query.tool)
 
     // console.log(gameChoice)
@@ -122,28 +135,40 @@ router.get('/necromancerGame13', (req, res) => {
 
     // }
 
-    // let winGame = deathQuestGameFunctions.generateRandNum(10)
-    // console.log(winGame)
+    let winGame = deathQuestGameFunctions.generateRandNum(10)
+    console.log(winGame)
 
-    // if (winGame <= 5) {
-    //     res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'));
-    //     player = deathQuestGameFunctions.giveItem(1)
-    //     player = deathQuestGameFunctions.eventPlacer(1)
-    // }
-    // else if (winGame > 5) {
-    //     res.sendFile(path.join(__dirname, '/html/necromancerGame13Lose.html')); 
-    // } 
+    if (winGame <= 5) {
+        res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'));
+        player = deathQuestGameFunctions.giveItem(1)
+        player = deathQuestGameFunctions.eventPlacer(1)
+    }
+    else if (winGame > 5) {
+        res.sendFile(path.join(__dirname, '/html/necromancerGame13Lose.html')); 
+    } 
 })
 
 router.get('/swamp5', (req, res) => {
+    let fallCheck = parseInt(req.query.fallCheck) 
+
+    if (fallCheck === 1 && player.location === 'start1') {
+        res.sendFile(path.join(__dirname, '/html/fallWarningStart.html'));
+    } 
+    else if (fallCheck === 1 && player.location === 'slimePuddles6') {
+        res.sendFile(path.join(__dirname, '/html/fallWarningPuddles.html'));
+    }
+    else if (fallCheck === 2) { 
+
     player = deathQuestGameFunctions.roomChanger(5)
     let slipCheck = deathQuestGameFunctions.generateRandNum(10)
 
-    if (slipCheck <= 5) {
-        res.sendFile(path.join(__dirname, '/html/swamp5.html')); 
-            } 
-    else if (slipCheck > 5) {
-        res.sendFile(path.join(__dirname, '/html/swamp5Slip.html')); 
+
+            if (slipCheck <= 9) {
+            res.sendFile(path.join(__dirname, '/html/swamp5.html')); 
+                } 
+        else if (slipCheck > 9) {
+            res.sendFile(path.join(__dirname, '/html/swamp5Slip.html')); 
+        }
     }
 }) 
 
@@ -180,22 +205,32 @@ router.get('/cliffSide8', (req, res) => {
 }) 
 
 router.get('/bridgePlateau9', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(9)
+    let wolfCheck = parseInt(req.query.wolfCheck) 
 
-    if (player.event4 === 'drawBridge') {
-        res.sendFile(path.join(__dirname, '/html/bridgePlateau9Down.html')); 
-    } 
-    else if (player.tool === 'Sword') {
-        res.sendFile(path.join(__dirname, '/html/bridgePlateau9Sword.html')); 
-        player = deathQuestGameFunctions.eventPlacer(4)
-    } 
-    else if (player.tool === 'Bow') {
-        res.sendFile(path.join(__dirname, '/html/bridgePlateau9Bow.html')); 
+    if (wolfCheck === 1 && player.location === 'cliffSide8') {
+        res.sendFile(path.join(__dirname, '/html/wolfWarningCliffSide.html'));
     }
-    else if (player.tool === 'Torch') {
-        res.sendFile(path.join(__dirname, '/html/bridgePlateau9Torch.html')); 
+    else if (wolfCheck === 1 && player.location === 'slimePuddles6') {
+        res.sendFile(path.join(__dirname, '/html/wolfWarningPuddles.html'));
     }
+    else if (wolfCheck === 2) { 
 
+        player = deathQuestGameFunctions.roomChanger(9)
+
+        if (player.event4 === 'drawBridge') {
+            res.sendFile(path.join(__dirname, '/html/bridgePlateau9Down.html')); 
+        } 
+        else if (player.tool === 'Sword') {
+            res.sendFile(path.join(__dirname, '/html/bridgePlateau9Sword.html')); 
+            player = deathQuestGameFunctions.eventPlacer(4)
+        } 
+        else if (player.tool === 'Bow') {
+            res.sendFile(path.join(__dirname, '/html/bridgePlateau9Bow.html')); 
+        }
+        else if (player.tool === 'Torch') {
+            res.sendFile(path.join(__dirname, '/html/bridgePlateau9Torch.html')); 
+        }
+    }
 }) 
 
 router.get('/castle10', (req, res) => {
@@ -237,5 +272,9 @@ router.get('/witchDie', (req, res) => {
     
     res.sendFile(path.join(__dirname, '/html/witchDie.html'));
 }) 
+
+router.get('/endGame', (req, res) => {
+    res.sendFile(path.join(__dirname, '/html/endGame.html'));
+})
 
 module.exports = router
