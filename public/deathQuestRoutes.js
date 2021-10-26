@@ -243,8 +243,6 @@ router.get('/bigBaddie11', (req, res) => {
 
 router.get('/deathRoom12', (req, res) => {
 
-
-
     player = deathQuestGameFunctions.roomChanger(1)
 
     res.sendFile(path.join(__dirname, '/html/deathRoom12.html'));
