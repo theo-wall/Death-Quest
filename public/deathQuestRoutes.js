@@ -112,28 +112,7 @@ router.get('/crypt4', (req, res) => {
     }
 })
 
-router.get('/necromancerGame13', (req, res) => {
-
-   
-    // if (counter() <= 5) {
-    // res.sendFile(path.join(__dirname, '/html/necromancerGame13.html'));
-    //     }
-    //     else {
-            
-    //     }
-    // let gameChoice = parseInt(req.query.tool)
-
-    // console.log(gameChoice)
-    
-    // if (gameChoice === 0) {
-
-    // }
-    // else if (gameChoice === false) {
-
-    // }
-    // else if (gameChoice === true) {
-
-    // }
+router.get('/necromancerGame13', (req, res) => { 
 
     let winGame = deathQuestGameFunctions.generateRandNum(10)
     console.log(winGame)
@@ -234,9 +213,21 @@ router.get('/bridgePlateau9', (req, res) => {
 }) 
 
 router.get('/castle10', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(10)
-    res.sendFile(path.join(__dirname, '/html/castle10.html')); 
-    
+
+    let witchCheck = parseInt(req.query.witchCheck) 
+
+    if (player.event3 !== 'witchHutMelt') {
+        if (!witchCheck) {
+            res.sendFile(path.join(__dirname, '/html/turnBackCastle.html')); 
+        } 
+        else if (witchCheck === 1) {
+            res.sendFile(path.join(__dirname, '/html/castleDeath.html')); 
+        }
+    } 
+    else {
+        res.sendFile(path.join(__dirname, '/html/castle10.html'));
+    }
+       
 }) 
 
 router.get('/bigBaddie11', (req, res) => {
@@ -251,6 +242,9 @@ router.get('/bigBaddie11', (req, res) => {
 }) 
 
 router.get('/deathRoom12', (req, res) => {
+
+
+
     player = deathQuestGameFunctions.roomChanger(1)
 
     res.sendFile(path.join(__dirname, '/html/deathRoom12.html'));
