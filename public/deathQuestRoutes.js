@@ -184,11 +184,12 @@ router.get('/cliffSide8', (req, res) => {
 }) 
 
 router.get('/bridgePlateau9', (req, res) => {
+    
     let wolfCheck = parseInt(req.query.wolfCheck) 
-
+    console.log(wolfCheck)
+    console.log(player.location)
     if ((wolfCheck === 1) && (player.location === 'cliffSide8')) {
-        console.log(wolfCheck)
-        console.log(player.location)
+
         res.sendFile(path.join(__dirname, '/html/wolfWarningCliffSide.html'));
     }
     else if ((wolfCheck === 1) && (player.location === 'slimePuddles6')) {
