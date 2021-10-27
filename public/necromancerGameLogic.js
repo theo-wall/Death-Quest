@@ -14,11 +14,9 @@ function checkIfArrayIsUnique(myArray) {
   return myArray.length === new Set(myArray).size;
 }
 
-let playerScore = 0
-let necroScore = 0
-let diceRoll
 
-  diceRoll = borelRoll()
+
+ let diceRoll = borelRoll()
   console.log(diceRoll)
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -27,8 +25,7 @@ let diceRoll
     
 
     nomatch.addEventListener('click', function() {
-      let playerChoice
-      playerChoice = true
+      let playerChoice = true
       if (playerChoice === checkIfArrayIsUnique(diceRoll)) {
 
         let content = document.querySelector('#content')
@@ -36,71 +33,55 @@ let diceRoll
         
         <div id="content">
         <p id="flavour">
-          the Necromancer rolls the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}. You Win This Round.
+          the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Win The Ruby.
         </p>
       </div>
 
       <nav>
         <ul>
-          <li id='cont'><a href="/necromancerGame13">Roll Again?</a></li>
+          <li id='cont'><a href="/necromancerGame13?rubyCheck=1">Get Out Of Here</a></li>
         </ul>
       </nav>`
-
-        playerScore++
-        console.log(playerScore)
-
-        let cont = document.querySelector('#cont')
-        cont.addEventListener('click', function() {})
-
       }
-      else {
+      else{
 
         let content = document.querySelector('#content')
         content.innerHTML = `    
         
         <div id="content">
         <p id="flavour">
-          the Necromancer rolls the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}. You Lose This Round.
+          The Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Lose Your SOUL.
         </p>
       </div>
 
       <nav>
         <ul>
-          <li id='cont'><a href="/necromancerGame13">Roll Again?</a></li>
+          <li id='cont'><a href="/deathRoom12">Accept Your Fate</a></li>
         </ul>
       </nav>`
-
-        necroScore++
-        console.log(playerScore)
-        let cont = document.querySelector('#cont')
-        cont.addEventListener('click', function () { }) 
-
       }
     })
 
     match.addEventListener('click', function() {
-      let playerChoice
-      playerChoice = false
+
+      let playerChoice = false
       if (playerChoice === checkIfArrayIsUnique(diceRoll)) {
         let content = document.querySelector('#content')
         content.innerHTML = `    
         
         <div id="content">
         <p id="flavour">
-          the Necromancer rolls the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}. You Win This Round.
+          the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Win The Ruby.
         </p>
       </div>
 
       <nav>
         <ul>
-          <li id='cont'><a href="/necromancerGame13">Roll Again?</a></li>
+         <li id='cont'><a href="/necromancerGame13?rubyCheck=1">Get Out Of Here</a></li>
         </ul>
       </nav>`
 
-        playerScore++
-        console.log(playerScore)
-        let cont = document.querySelector('#cont')
-        cont.addEventListener('click', function () {})  
+
       }
       else {
 
@@ -109,20 +90,15 @@ let diceRoll
         
         <div id="content">
         <p id="flavour">
-          the Necromancer rolls the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}. You Lose This Round.
+          the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Lose This Round.
         </p>
       </div>
 
       <nav>
         <ul>
-          <li id='cont'><a href="/necromancerGame13">Roll Again?</a></li>
+          <li id='cont'><a href="/deathRoom12">Accept Your Fate</a></li>
         </ul>
       </nav>`
-
-        necroScore++
-        console.log(playerScore)
-        let cont = document.querySelector('#cont')
-        cont.addEventListener('click', function () { }) 
 
       }
     })

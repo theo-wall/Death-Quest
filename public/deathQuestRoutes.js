@@ -2,7 +2,7 @@ const deathQuestGameFunctions = require('./deathQuestGameFunctions')
 
 const path = require('path');
 const express = require('express');
-const { counter } = require('./deathQuestGameFunctions');
+const { counter } = require('./deathQuestGameFunctions')
 const router = express.Router()
 
 // let player = []
@@ -23,32 +23,32 @@ let player = {
 // 
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'/html/index.html'));
+    res.sendFile(path.join(__dirname,'/html/index.html'))
   })
 
 router.get('/startGame', (req, res) => {
-    res.sendFile(path.join(__dirname, '/html/startGame.html'));
+    res.sendFile(path.join(__dirname, '/html/startGame.html'))
     player = deathQuestGameFunctions.startGame()
     
     console.log(player)
 })
 
 router.get('/resetGame', (req, res) => {
-    res.sendFile(path.join(__dirname, '/html/resetGame.html'));
+    res.sendFile(path.join(__dirname, '/html/resetGame.html'))
     player = deathQuestGameFunctions.resetGame()
     
     console.log(player)
 })
 
 router.get('/start1a', (req, res) => {    
-    res.sendFile(path.join(__dirname, '/html/start1a.html'));
+    res.sendFile(path.join(__dirname, '/html/start1a.html'))
     player = deathQuestGameFunctions.roomChanger(1)
 
 })
 
 router.get('/start1b', (req, res) => {
     
-    res.sendFile(path.join(__dirname, '/html/start1b.html'));
+    res.sendFile(path.join(__dirname, '/html/start1b.html'))
     player = deathQuestGameFunctions.roomChanger(1)
 
     let toolPickUp = parseInt(req.query.tool)
@@ -58,7 +58,7 @@ router.get('/start1b', (req, res) => {
 })
 
 router.get('/start1', (req, res) => {
-    res.sendFile(path.join(__dirname, '/html/start1.html'));
+    res.sendFile(path.join(__dirname, '/html/start1.html'))
     player = deathQuestGameFunctions.roomChanger(1)
 
 })
@@ -70,14 +70,14 @@ router.get('/caves2', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(2)
 
     if (darkCheck === 1) {
-        res.sendFile(path.join(__dirname, '/html/darkWarningStart.html'));
+        res.sendFile(path.join(__dirname, '/html/darkWarningStart.html'))
     } 
     else if (darkCheck === 2) {
-            if (player.tool === 'Torch') {
-            res.sendFile(path.join(__dirname, '/html/caves2.html'));
+        if (player.tool === 'Torch') {
+            res.sendFile(path.join(__dirname, '/html/caves2.html'))
         } 
         else {
-            res.sendFile(path.join(__dirname, '/html/caves2Death.html'));
+            res.sendFile(path.join(__dirname, '/html/caves2Death.html'))
         } 
     }
 
@@ -89,14 +89,14 @@ router.get('/windingPath3', (req, res) => {
     let darkCheck = parseInt(req.query.darkCheck) 
     
     if (darkCheck === 1) {
-        res.sendFile(path.join(__dirname, '/html/darkWarningPuddles.html'));
+        res.sendFile(path.join(__dirname, '/html/darkWarningPuddles.html'))
     }
     else if (darkCheck === 2) {
         if (player.tool === 'Torch') {
-            res.sendFile(path.join(__dirname, '/html/windingPath3.html'));
+            res.sendFile(path.join(__dirname, '/html/windingPath3.html'))
         }
         else {
-            res.sendFile(path.join(__dirname, '/html/caves2Death.html'));
+            res.sendFile(path.join(__dirname, '/html/caves2Death.html'))
         }
     }
 }) 
@@ -105,27 +105,48 @@ router.get('/crypt4', (req, res) => {
     player = deathQuestGameFunctions.roomChanger(4)
     
     if (player.event1 === 'necroDoor') {
-        res.sendFile(path.join(__dirname, '/html/crypt4NecroDoor.html'));
+        res.sendFile(path.join(__dirname, '/html/crypt4NecroDoor.html'))
     }
     else {
-        res.sendFile(path.join(__dirname, '/html/crypt4.html'));
+        res.sendFile(path.join(__dirname, '/html/crypt4.html'))
     }
 })
 
-router.get('/necromancerGame13', (req, res) => { 
-
-    let winGame = deathQuestGameFunctions.generateRandNum(10)
-    console.log(winGame)
-
-    if (winGame <= 5) {
-        res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'));
+router.get('/necromancerGame13', (req, res) => {
+    let rubyCheck = parseInt(req.query.rubyCheck)
+    
+    if (rubyCheck === 0) {
+        res.sendFile(path.join(__dirname, '/html/necromancerGame13.html'))
+    }
+    else if (rubyCheck === 1) {
+        res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'))
         player = deathQuestGameFunctions.giveItem(1)
         player = deathQuestGameFunctions.eventPlacer(1)
     }
-    else if (winGame > 5) {
-        res.sendFile(path.join(__dirname, '/html/necromancerGame13Lose.html')); 
-    } 
-})
+    
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     let cont = document.querySelectorAll('#cont')
+    //     cont.addEventListener('click', function() {
+    //         console.log('click')
+    //     })
+    // })
+
+
+
+       
+    
+    // let winGame = deathQuestGameFunctions.generateRandNum(10)
+    // console.log(winGame)
+
+    // if (winGame <= 5) {
+    //     res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'));
+    //     player = deathQuestGameFunctions.giveItem(1)
+    //     player = deathQuestGameFunctions.eventPlacer(1)
+    // }
+    // else if (winGame > 5) {
+    //     res.sendFile(path.join(__dirname, '/html/necromancerGame13Lose.html')); 
+}) 
+    
 
 router.get('/swamp5', (req, res) => {
     let fallCheck = parseInt(req.query.fallCheck) 
@@ -138,14 +159,14 @@ router.get('/swamp5', (req, res) => {
     }
     else if (fallCheck === 2) { 
 
-    player = deathQuestGameFunctions.roomChanger(5)
-    let slipCheck = deathQuestGameFunctions.generateRandNum(10)
+        player = deathQuestGameFunctions.roomChanger(5)
+        let slipCheck = deathQuestGameFunctions.generateRandNum(10)
 
 
-            if (slipCheck <= 9) {
+        if (slipCheck <= 6) {
             res.sendFile(path.join(__dirname, '/html/swamp5.html')); 
                 } 
-        else if (slipCheck > 9) {
+        else if (slipCheck > 6) {
             res.sendFile(path.join(__dirname, '/html/swamp5Slip.html')); 
         }
     }
@@ -184,7 +205,7 @@ router.get('/cliffSide8', (req, res) => {
 }) 
 
 router.get('/bridgePlateau9', (req, res) => {
-    
+
     let wolfCheck = parseInt(req.query.wolfCheck) 
     console.log(wolfCheck)
     console.log(player.location)
