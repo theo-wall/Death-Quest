@@ -1,3 +1,6 @@
+const { ObjectId } = require('mongodb')
+const db = require('../db')
+
 let rooms = [
     'start1',
     'caves2',
@@ -19,7 +22,9 @@ let player = {
     event1: 'noEvent', 
     event2: 'noEvent', 
     event3: 'noEvent', 
-    event4: 'noEvent'}
+    event4: 'noEvent',
+    // playerName: 'default'
+}
 
 let toolIndex = ['Sword', 'Bow', 'Torch','noTool']
 
@@ -126,11 +131,11 @@ function eventPlacer(event) {
 }
 
 // 
-// generates random number from 0 to number specified(num)
+// generates random number from 1 to number specified(num)
 // 
 
 function generateRandNum(num) {
-   return Math.floor(Math.random() * num)
+   return Math.floor(Math.random() * (num + 1))
 }
 
 function counter() {
@@ -138,6 +143,68 @@ function counter() {
     console.log(gameCount);
     return gameCount
 }
+
+async function createPlayer(playerData) {
+    let playerCollection = await db.getCollection('dqPlayers')
+    let insertResult = await playerCollection.insertOne(playerData)
+    return insertResult.insertedId.id
+}
+
+async function findPlayerById(id) {
+    let playerCollection = await db.getCollection('dqPlayers')
+    let player = await playerCollection.findOne({ _id: ObjectId(id) })
+    return player
+}
+
+async function findPlayerByName(name) {
+    let playerCollection = await db.getCollection('dqPlayers')
+    let player = await playerCollection.findOne({ playerName: name })
+    return player
+}
+
+async function updatePlayer(id, newData) {
+    let peopleCollection = await db.getCollection('dqPlayers')
+    return peopleCollection.updateOne({ _id: ObjectId(id) }, { $set: newData })
+}
+
+async function deletePlayerById(id) {
+    let playerCollection = await db.getCollection('dqPlayers')
+    return playerCollection.deleteOne({_id: ObjectId(id)})
+}
+
+async function newPlayer(playerName) {
+    let newPlayer = {
+        location: '',
+        tool: 'noTool',
+        item1: 'noItem1',
+        item2: 'noItem2',
+        event1: 'noEvent',
+        event2: 'noEvent',
+        event3: 'noEvent',
+        event4: 'noEvent',
+        name: playerName
+    }
+    console.log(newPlayer)
+
+    let newPlayerId = await createPlayer(newPlayer)
+    console.log(`Created new player for ${newPlayer.playerName}.`)
+    console.log(newPlayerId)
+    return newPlayerId
+}
+
+async function logPlayer(id) {
+
+    let findPerson = await findPlayerById(id)
+    console.log(findPerson)
+}
+
+
+// deletePlayerById(newPlayerId.id)
+
+
+// let newId = newPlayer('Jimmy')
+// console.log(newId)
+
 // 
 // generates dice roll object for dice game
 // 
@@ -164,6 +231,10 @@ module.exports = {
     giveItem,
     eventPlacer,
     generateRandNum,
-    counter
-    
+    counter,
+    createPlayer,
+    findPlayerById,
+    findPlayerByName,
+    updatePlayer,
+    newPlayer
 }

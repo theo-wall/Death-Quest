@@ -13,6 +13,7 @@ a {
 
 a:hover {
 	color: red;
+	cursor: pointer;
 }
 
 #flavour {

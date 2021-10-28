@@ -1,17 +1,14 @@
 Bugs
 - All levels are accessable by URL
 - you dont have to go to listed locations from current room
-- no win state at end of game
 - make proper reset game
 
 
 Features:
-- add necromancer game
-- add win condition
-- add final boss fight
-- finish story sections in all zones
-- html front end map
-- add question text when character is going to die
+- add necromancer game (partly complete)
+- add final boss fight (probably wont happen)
+- html front end map (probably wont happen)
+- add DB support to save character
 
  
 

@@ -1,11 +1,11 @@
 function borelRoll() {
     let roll = [
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 10),
-      Math.floor(Math.random() * 30)
+      Math.floor(Math.random() * 6) + 1,
+      Math.floor(Math.random() * 6) + 1,
+      Math.floor(Math.random() * 6) + 1,
+      Math.floor(Math.random() * 6) + 1,
+      Math.floor(Math.random() * 10) + 1,
+      Math.floor(Math.random() * 30) + 1
     ]
   return roll
 }
