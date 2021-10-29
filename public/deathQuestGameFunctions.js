@@ -22,7 +22,7 @@ let player = {
     event1: 'noEvent', 
     event2: 'noEvent', 
     event3: 'noEvent', 
-    event4: 'noEvent',
+    event4: 'noEvent'
     // playerName: 'default'
 }
 
