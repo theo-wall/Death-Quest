@@ -15,6 +15,7 @@ let rooms = [
     'bigBaddie11']
 
 let player = {
+    
     location: '',
     tool: 'noTool',
     item1: 'noItem1',
@@ -131,12 +132,43 @@ function eventPlacer(event) {
 }
 
 // 
-// generates random number from 1 to number specified(num)
+// Synce Functions for use with mongo DB
 // 
+
+async function newPlayer(playerName) {
+    let newPlayer = {
+        location: '',
+        tool: 'noTool',
+        item1: 'noItem1',
+        item2: 'noItem2',
+        event1: 'noEvent',
+        event2: 'noEvent',
+        event3: 'noEvent',
+        event4: 'noEvent',
+        name: playerName
+    }
+    console.log(newPlayer)
+
+    let newPlayerId = await createPlayer(newPlayer)
+    console.log(`Created new player for ${newPlayer.playerName}.`)
+    console.log(newPlayerId)
+    return newPlayerId
+}
+
+async function asyncUpdatePlayer(id, newData) {
+
+    let player = await db.getCollection('dqPlayers')
+    return player.updateOne({ _id: ObjectId(id) }, { $set: newData })
+}
 
 function generateRandNum(num) {
    return Math.floor(Math.random() * (num + 1))
 }
+
+// 
+// 
+// 
+// 
 
 function counter() {
     gameCount++;
@@ -163,8 +195,8 @@ async function findPlayerByName(name) {
 }
 
 async function updatePlayer(id, newData) {
-    let peopleCollection = await db.getCollection('dqPlayers')
-    return peopleCollection.updateOne({ _id: ObjectId(id) }, { $set: newData })
+    let playerCollection = await db.getCollection('dqPlayers')
+    return playerCollection.updateOne({ _id: ObjectId(id) }, { $set: newData })
 }
 
 async function deletePlayerById(id) {
@@ -236,5 +268,6 @@ module.exports = {
     findPlayerById,
     findPlayerByName,
     updatePlayer,
-    newPlayer
+    newPlayer,
+    asyncUpdatePlayer
 }

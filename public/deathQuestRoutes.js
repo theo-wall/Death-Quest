@@ -29,25 +29,19 @@ router.get('/', (req, res) => {
 router.get('/startGame', (req, res) => {
     res.sendFile(path.join(__dirname, '/html/startGame.html'))
     player = deathQuestGameFunctions.startGame()
-    
-    console.log(player)
 })
 
 router.get('/resetGame', (req, res) => {
     res.sendFile(path.join(__dirname, '/html/resetGame.html'))
     player = deathQuestGameFunctions.resetGame()
-    
-    console.log(player)
 })
 
 router.get('/start1a', (req, res) => {    
     res.sendFile(path.join(__dirname, '/html/start1a.html'))
     player = deathQuestGameFunctions.roomChanger(1)
-
 })
 
 router.get('/start1b', (req, res) => {
-    
     res.sendFile(path.join(__dirname, '/html/start1b.html'))
     player = deathQuestGameFunctions.roomChanger(1)
 
@@ -60,12 +54,10 @@ router.get('/start1b', (req, res) => {
 router.get('/start1', (req, res) => {
     res.sendFile(path.join(__dirname, '/html/start1.html'))
     player = deathQuestGameFunctions.roomChanger(1)
-
 })
 
 
 router.get('/caves2', (req, res) => {
-    
     let darkCheck = parseInt(req.query.darkCheck) 
     player = deathQuestGameFunctions.roomChanger(2)
 
@@ -80,8 +72,6 @@ router.get('/caves2', (req, res) => {
             res.sendFile(path.join(__dirname, '/html/caves2Death.html'))
         } 
     }
-
-
 }) 
 
 router.get('/windingPath3', (req, res) => {
@@ -205,10 +195,8 @@ router.get('/cliffSide8', (req, res) => {
 }) 
 
 router.get('/bridgePlateau9', (req, res) => {
-
     let wolfCheck = parseInt(req.query.wolfCheck) 
-    console.log(wolfCheck)
-    console.log(player.location)
+
     if ((wolfCheck === 1) && (player.location === 'cliffSide8')) {
 
         res.sendFile(path.join(__dirname, '/html/wolfWarningCliffSide.html'));
@@ -237,7 +225,6 @@ router.get('/bridgePlateau9', (req, res) => {
 }) 
 
 router.get('/castle10', (req, res) => {
-
     let witchCheck = parseInt(req.query.witchCheck) 
 
     if (player.event3 !== 'witchHutMelt') {
@@ -266,11 +253,9 @@ router.get('/bigBaddie11', (req, res) => {
 }) 
 
 router.get('/deathRoom12', (req, res) => {
-
     player = deathQuestGameFunctions.roomChanger(1)
 
     res.sendFile(path.join(__dirname, '/html/deathRoom12.html'));
-    
 }) 
 
 router.get('/witchGive', (req, res) => {
@@ -280,7 +265,6 @@ router.get('/witchGive', (req, res) => {
 
     player = deathQuestGameFunctions.eventPlacer(3)
     player = deathQuestGameFunctions.giveItem(2)
-
 }) 
 
 router.get('/witchDie', (req, res) => {
