@@ -31,17 +31,17 @@ function checkIfArrayIsUnique(myArray) {
         let content = document.querySelector('#content')
         content.innerHTML = `    
         
-        <div id="content">
-        <p id="flavour">
-          the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Win The Ruby.
-        </p>
-      </div>
+          <div id="content">
+            <p id="flavour">
+              the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Win The Ruby.
+            </p>
+          </div>
 
-      <nav>
-        <ul>
-          <li id='cont'><a href="/necromancerGame13?rubyCheck=1">Get Out Of Here</a></li>
-        </ul>
-      </nav>`
+          <nav>
+            <ul>
+              <li id='cont'><a href="/necromancerGame13?rubyCheck=1">Get Out Of Here</a></li>
+            </ul>
+          </nav>`
       }
       else{
 
@@ -49,16 +49,16 @@ function checkIfArrayIsUnique(myArray) {
         content.innerHTML = `    
         
         <div id="content">
-        <p id="flavour">
-          The Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Lose Your SOUL.
-        </p>
-      </div>
+          <p id="flavour">
+            The Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Lose Your SOUL.
+          </p>
+       </div>
 
-      <nav>
-        <ul>
-          <li id='cont'><a href="/deathRoom12">Accept Your Fate</a></li>
-        </ul>
-      </nav>`
+       <nav>
+          <ul>
+            <li id='cont'><a href="/deathRoom12">Accept Your Fate</a></li>
+          </ul>
+        </nav>`
       }
     })
 
@@ -70,16 +70,16 @@ function checkIfArrayIsUnique(myArray) {
         content.innerHTML = `    
         
         <div id="content">
-        <p id="flavour">
-          the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Win The Ruby.
-        </p>
-      </div>
+          <p id="flavour">
+            the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Win The Ruby.
+          </p>
+        </div>
 
-      <nav>
-        <ul>
-         <li id='cont'><a href="/necromancerGame13?rubyCheck=1">Get Out Of Here</a></li>
-        </ul>
-      </nav>`
+        <nav>
+          <ul>
+          <li id='cont'><a href="/necromancerGame13?rubyCheck=1">Get Out Of Here</a></li>
+          </ul>
+        </nav>`
 
 
       }
@@ -89,16 +89,16 @@ function checkIfArrayIsUnique(myArray) {
         content.innerHTML = `    
         
         <div id="content">
-        <p id="flavour">
-          the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Lose This Round.
-        </p>
-      </div>
+          <p id="flavour">
+            the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Lose This Round.
+          </p>
+        </div>
 
-      <nav>
-        <ul>
-          <li id='cont'><a href="/deathRoom12">Accept Your Fate</a></li>
-        </ul>
-      </nav>`
+        <nav>
+          <ul>
+            <li id='cont'><a href="/deathRoom12">Accept Your Fate</a></li>
+          </ul>
+        </nav>`
 
       }
     })

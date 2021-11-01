@@ -1,7 +1,7 @@
 const deathQuestGameFunctions = require('./deathQuestGameFunctions')
 
-const path = require('path');
-const express = require('express');
+const path = require('path')
+const express = require('express')
 const { counter } = require('./deathQuestGameFunctions')
 const router = express.Router()
 
