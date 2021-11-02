@@ -1,5 +1,6 @@
 Bugs
 -have database update tools an get all tool checks from database
+-add try and catch to async function
 
 
 Features:

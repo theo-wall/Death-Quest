@@ -32,22 +32,21 @@ router.get('/start1a', async (req, res) => {
     res.sendFile(path.join(__dirname, '/html/start1a.html'))
 })
 
-router.get('/start1b', (req, res) => {
+router.get('/start1b', async (req, res) => {
     let toolPickUp = parseInt(req.query.tool)
 
     deathQuestGameFunctions.updatePlayer(player, { tool: deathQuestGameFunctions.giveTool(toolPickUp) })
 
-    // player.tool = deathQuestGameFunctions.giveTool(toolPickUp)
     res.sendFile(path.join(__dirname, '/html/start1b.html'))
 })
 
-router.get('/start1', (req, res) => {
+router.get('/start1', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/start1.html'))
 })
 
 
-router.get('/caves2', (req, res) => {
+router.get('/caves2', async (req, res) => {
     let darkCheck = parseInt(req.query.darkCheck) 
     deathQuestGameFunctions.updatePlayer(player, { location: 'caves2' })
 
@@ -55,7 +54,7 @@ router.get('/caves2', (req, res) => {
         res.sendFile(path.join(__dirname, '/html/darkWarningStart.html'))
     } 
     else if (darkCheck === 2) {
-        if (player.tool === 'Torch') {
+        if (deathQuestGameFunctions.findInInventory(tool) === 'Torch') {
             res.sendFile(path.join(__dirname, '/html/caves2.html'))
         } 
         else {
@@ -64,7 +63,7 @@ router.get('/caves2', (req, res) => {
     }
 }) 
 
-router.get('/windingPath3', (req, res) => {
+router.get('/windingPath3', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'windingPath3' })
     let darkCheck = parseInt(req.query.darkCheck) 
     
@@ -72,7 +71,7 @@ router.get('/windingPath3', (req, res) => {
         res.sendFile(path.join(__dirname, '/html/darkWarningPuddles.html'))
     }
     else if (darkCheck === 2) {
-        if (player.tool === 'Torch') {
+        if (deathQuestGameFunctions.findInInventory(tool) === 'Torch') {
             res.sendFile(path.join(__dirname, '/html/windingPath3.html'))
         }
         else {
@@ -81,7 +80,7 @@ router.get('/windingPath3', (req, res) => {
     }
 }) 
 
-router.get('/crypt4', (req, res) => {
+router.get('/crypt4', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'crypt4' })
     
     if (player.event1 === 'necroDoor') {
@@ -92,7 +91,7 @@ router.get('/crypt4', (req, res) => {
     }
 })
 
-router.get('/necromancerGame13', (req, res) => {
+router.get('/necromancerGame13', async (req, res) => {
     let rubyCheck = parseInt(req.query.rubyCheck)
     
     if (rubyCheck === 0) {
@@ -127,7 +126,7 @@ router.get('/necromancerGame13', (req, res) => {
 }) 
     
 
-router.get('/swamp5', (req, res) => {
+router.get('/swamp5', async (req, res) => {
     let fallCheck = parseInt(req.query.fallCheck) 
 
     if (fallCheck === 1 && player.location === 'start1') {
@@ -151,7 +150,7 @@ router.get('/swamp5', (req, res) => {
     }
 }) 
 
-router.get('/slimePuddles6', (req, res) => {
+router.get('/slimePuddles6', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'slimePuddles6' })
     
     if (player === 'slimeBridge') {
@@ -164,7 +163,7 @@ router.get('/slimePuddles6', (req, res) => {
     }
 }) 
 
-router.get('/witchHut7', (req, res) => {
+router.get('/witchHut7', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'witchHut7' })
     if (player.event3 === 'witchHutMelt') {
         res.sendFile(path.join(__dirname, '/html/witchHut7Melt.html')); 
@@ -177,12 +176,12 @@ router.get('/witchHut7', (req, res) => {
     }
 }) 
 
-router.get('/cliffSide8', (req, res) => {
+router.get('/cliffSide8', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'cliffSide8' })
     res.sendFile(path.join(__dirname, '/html/cliffSide8.html')); 
 }) 
 
-router.get('/bridgePlateau9', (req, res) => {
+router.get('/bridgePlateau9', async (req, res) => {
     let wolfCheck = parseInt(req.query.wolfCheck) 
 // 
 // Make this work with async functions
@@ -212,7 +211,7 @@ router.get('/bridgePlateau9', (req, res) => {
     }
 }) 
 
-router.get('/castle10', (req, res) => {
+router.get('/castle10', async (req, res) => {
     let witchCheck = parseInt(req.query.witchCheck) 
 
     if (player.event3 !== 'witchHutMelt') {
@@ -230,7 +229,7 @@ router.get('/castle10', (req, res) => {
        
 }) 
 
-router.get('/bigBaddie11', (req, res) => {
+router.get('/bigBaddie11', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'bigBaddie11' })
 
     if (player.item2 === 'Golden Key') {
@@ -241,22 +240,22 @@ router.get('/bigBaddie11', (req, res) => {
     }
 }) 
 
-router.get('/deathRoom12', (req, res) => {
+router.get('/deathRoom12', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/deathRoom12.html'));
 }) 
 
-router.get('/witchGive', (req, res) => {
+router.get('/witchGive', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'start1', event3: 'witchHutMelt', item2: 'Golden Key' })
     res.sendFile(path.join(__dirname, '/html/witchGive.html'));
 }) 
 
-router.get('/witchDie', (req, res) => {
+router.get('/witchDie', async (req, res) => {
     deathQuestGameFunctions.updatePlayer(player, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/witchDie.html'));
 }) 
 
-router.get('/endGame', (req, res) => {
+router.get('/endGame', async (req, res) => {
     res.sendFile(path.join(__dirname, '/html/endGame.html'));
 })
 

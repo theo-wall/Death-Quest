@@ -160,6 +160,11 @@ async function createPlayer(playerData) {
     return insertResult.insertedId.id
 }
 
+async function findInInventory(inventory) {
+    let playerCollection = await db.getCollection('dqPlayers')
+    let item = await playerCollection.findOne({inventory})
+    return item
+}
 // async function updatePlayer(id, newData) {
 //         let player = await db.getCollection('dqPlayers')
 //         return player.updateOne({ _id: ObjectId(id)}, { $set: newData })
@@ -270,5 +275,6 @@ module.exports = {
     findPlayerByName,
     updatePlayer,
     newPlayer,
-    updatePlayer
+    updatePlayer,
+    findInInventory
 }
