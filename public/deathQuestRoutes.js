@@ -2,7 +2,6 @@ const deathQuestGameFunctions = require('./deathQuestGameFunctions')
 
 const path = require('path')
 const express = require('express')
-const { counter } = require('./deathQuestGameFunctions')
 const router = express.Router()
 
 // let player = []
@@ -101,30 +100,7 @@ router.get('/necromancerGame13', async (req, res) => {
         deathQuestGameFunctions.updatePlayer(playerId, { item1: 'Ruby', event1: 'necroDoor' })
         res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'))
     }
-    
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     let cont = document.querySelectorAll('#cont')
-    //     cont.addEventListener('click', function() {
-    //         console.log('click')
-    //     })
-    // })
-
-
-
-       
-    
-    // let winGame = deathQuestGameFunctions.generateRandNum(10)
-    // console.log(winGame)
-
-    // if (winGame <= 5) {
-    //     res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'));
-    //     player = deathQuestGameFunctions.giveItem(1)
-    //     player = deathQuestGameFunctions.eventPlacer(1)
-    // }
-    // else if (winGame > 5) {
-    //     res.sendFile(path.join(__dirname, '/html/necromancerGame13Lose.html')); 
-}) 
-    
+})    
 
 router.get('/swamp5', async (req, res) => {
     let fallCheck = parseInt(req.query.fallCheck) 
@@ -182,9 +158,7 @@ router.get('/cliffSide8', async (req, res) => {
 
 router.get('/bridgePlateau9', async (req, res) => {
     let wolfCheck = parseInt(req.query.wolfCheck) 
-// 
-// Make this work with async functions
-// 
+
     if ((wolfCheck === 1) && ((await deathQuestGameFunctions.inventoryFind(playerId, 'location')) === 'cliffSide8')) {
         res.sendFile(path.join(__dirname, '/html/wolfWarningCliffSide.html'));
     }
@@ -260,3 +234,4 @@ router.get('/endGame', async (req, res) => {
 })
 
 module.exports = router
+
