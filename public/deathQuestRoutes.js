@@ -140,7 +140,6 @@ router.get('/swamp5', async (req, res) => {
         deathQuestGameFunctions.updatePlayer(playerId, { location: 'swamp5' })
         let slipCheck = deathQuestGameFunctions.generateRandNum(10)
 
-
         if (slipCheck <= 6) {
             res.sendFile(path.join(__dirname, '/html/swamp5.html')); 
                 } 
@@ -200,7 +199,7 @@ router.get('/bridgePlateau9', async (req, res) => {
         } 
         else if ((await deathQuestGameFunctions.inventoryFind(playerId, 'tool')) === 'Sword') {
             res.sendFile(path.join(__dirname, '/html/bridgePlateau9Sword.html')); 
-            deathQuestGameFunctions.updatePlayer(playerId, { event2: 'drawBridge' })
+            deathQuestGameFunctions.updatePlayer(playerId, { event4: 'drawBridge' })
         } 
         else if ((await deathQuestGameFunctions.inventoryFind(playerId, 'tool')) === 'Bow') {
             res.sendFile(path.join(__dirname, '/html/bridgePlateau9Bow.html')); 
@@ -256,6 +255,7 @@ router.get('/witchDie', async (req, res) => {
 }) 
 
 router.get('/endGame', async (req, res) => {
+    deathQuestGameFunctions.deletePlayerById(playerId)
     res.sendFile(path.join(__dirname, '/html/endGame.html'));
 })
 

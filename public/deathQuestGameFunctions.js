@@ -311,5 +311,6 @@ module.exports = {
     updatePlayer,
     newPlayer,
     updatePlayer,
-    inventoryFind
+    inventoryFind,
+    deletePlayerById
 }
