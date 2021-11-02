@@ -7,7 +7,7 @@ const router = express.Router()
 
 // let player = []
 
-let player
+let playerId
 
 // 
 // starting game screen
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
   })
 
 router.get('/startGame', async (req, res) => {  
-    player = await deathQuestGameFunctions.newPlayer()
+    playerId = await deathQuestGameFunctions.newPlayer()
     res.sendFile(path.join(__dirname, '/html/startGame.html'))
 })
 
@@ -28,33 +28,33 @@ router.get('/resetGame', (req, res) => {
 })
 
 router.get('/start1a', async (req, res) => {   
-    deathQuestGameFunctions.updatePlayer(player, {location: 'start1'})
+    deathQuestGameFunctions.updatePlayer(playerId, {location: 'start1'})
     res.sendFile(path.join(__dirname, '/html/start1a.html'))
 })
 
 router.get('/start1b', async (req, res) => {
     let toolPickUp = parseInt(req.query.tool)
 
-    deathQuestGameFunctions.updatePlayer(player, { tool: deathQuestGameFunctions.giveTool(toolPickUp) })
+    deathQuestGameFunctions.updatePlayer(playerId, { tool: deathQuestGameFunctions.giveTool(toolPickUp) })
 
     res.sendFile(path.join(__dirname, '/html/start1b.html'))
 })
 
 router.get('/start1', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'start1' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/start1.html'))
 })
 
 
 router.get('/caves2', async (req, res) => {
     let darkCheck = parseInt(req.query.darkCheck) 
-    deathQuestGameFunctions.updatePlayer(player, { location: 'caves2' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'caves2' })
 
     if (darkCheck === 1) {
         res.sendFile(path.join(__dirname, '/html/darkWarningStart.html'))
     } 
     else if (darkCheck === 2) {
-        if (deathQuestGameFunctions.findInInventory(tool) === 'Torch') {
+        if (await deathQuestGameFunctions.inventoryFind(playerId,'tool') === 'Torch') {
             res.sendFile(path.join(__dirname, '/html/caves2.html'))
         } 
         else {
@@ -64,14 +64,14 @@ router.get('/caves2', async (req, res) => {
 }) 
 
 router.get('/windingPath3', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'windingPath3' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'windingPath3' })
     let darkCheck = parseInt(req.query.darkCheck) 
     
     if (darkCheck === 1) {
         res.sendFile(path.join(__dirname, '/html/darkWarningPuddles.html'))
     }
     else if (darkCheck === 2) {
-        if (deathQuestGameFunctions.findInInventory(tool) === 'Torch') {
+        if (await deathQuestGameFunctions.inventoryFind(playerId, 'tool') === 'Torch') {
             res.sendFile(path.join(__dirname, '/html/windingPath3.html'))
         }
         else {
@@ -81,9 +81,9 @@ router.get('/windingPath3', async (req, res) => {
 }) 
 
 router.get('/crypt4', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'crypt4' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'crypt4' })
     
-    if (player.event1 === 'necroDoor') {
+    if (await deathQuestGameFunctions.inventoryFind(playerId, 'event1') === 'necroDoor') {
         res.sendFile(path.join(__dirname, '/html/crypt4NecroDoor.html'))
     }
     else {
@@ -98,7 +98,7 @@ router.get('/necromancerGame13', async (req, res) => {
         res.sendFile(path.join(__dirname, '/html/necromancerGame13.html'))
     }
     else if (rubyCheck === 1) {
-        deathQuestGameFunctions.updatePlayer(player, { item1: 'Ruby', event1: 'necroDoor' })
+        deathQuestGameFunctions.updatePlayer(playerId, { item1: 'Ruby', event1: 'necroDoor' })
         res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'))
     }
     
@@ -129,15 +129,15 @@ router.get('/necromancerGame13', async (req, res) => {
 router.get('/swamp5', async (req, res) => {
     let fallCheck = parseInt(req.query.fallCheck) 
 
-    if (fallCheck === 1 && player.location === 'start1') {
+    if (fallCheck === 1 && (await deathQuestGameFunctions.inventoryFind(playerId,'location')) === 'start1') {
         res.sendFile(path.join(__dirname, '/html/fallWarningStart.html'));
     } 
-    else if (fallCheck === 1 && player.location === 'slimePuddles6') {
+    else if (fallCheck === 1 && (await deathQuestGameFunctions.inventoryFind(playerId, 'location')) === 'slimePuddles6') {
         res.sendFile(path.join(__dirname, '/html/fallWarningPuddles.html'));
     }
     else if (fallCheck === 2) { 
 
-        deathQuestGameFunctions.updatePlayer(player, { location: 'swamp5' })
+        deathQuestGameFunctions.updatePlayer(playerId, { location: 'swamp5' })
         let slipCheck = deathQuestGameFunctions.generateRandNum(10)
 
 
@@ -151,33 +151,33 @@ router.get('/swamp5', async (req, res) => {
 }) 
 
 router.get('/slimePuddles6', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'slimePuddles6' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'slimePuddles6' })
     
-    if (player === 'slimeBridge') {
+    if (await deathQuestGameFunctions.inventoryFind(playerId, 'event2') === 'slimeBridge') {
         res.sendFile(path.join(__dirname, '/html/slimePuddles6Down.html'));          
-    } else if (player.tool === 'Bow') {
+    } else if (await deathQuestGameFunctions.inventoryFind(playerId, 'tool') === 'Bow') {
         res.sendFile(path.join(__dirname, '/html/slimePuddles6Bow.html')); 
-        player = deathQuestGameFunctions.eventPlacer(2)
-    } else if (player.event2 === 'noEvent') {
+        deathQuestGameFunctions.updatePlayer(playerId, { event2: 'slimeBridge' })
+    } else if (await deathQuestGameFunctions.inventoryFind(playerId, 'event2') === 'noEvent') {
         res.sendFile(path.join(__dirname, '/html/slimePuddles6up.html')); 
     }
 }) 
 
 router.get('/witchHut7', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'witchHut7' })
-    if (player.event3 === 'witchHutMelt') {
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'witchHut7' })
+    if (await deathQuestGameFunctions.inventoryFind(playerId, 'event3') === 'witchHutMelt') {
         res.sendFile(path.join(__dirname, '/html/witchHut7Melt.html')); 
     }
-    else if (player.item1 === 'Ruby') {
+    else if (await deathQuestGameFunctions.inventoryFind(playerId, 'item1') === 'Ruby') {
         res.sendFile(path.join(__dirname, '/html/witchHut7Ruby.html')); 
     } 
-    else if (player.item1 === 'noItem1'){
+    else if (await deathQuestGameFunctions.inventoryFind(playerId, 'item1') === 'noItem1'){
         res.sendFile(path.join(__dirname, '/html/witchHut7NoRuby.html')); 
     }
 }) 
 
 router.get('/cliffSide8', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'cliffSide8' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'cliffSide8' })
     res.sendFile(path.join(__dirname, '/html/cliffSide8.html')); 
 }) 
 
@@ -186,26 +186,26 @@ router.get('/bridgePlateau9', async (req, res) => {
 // 
 // Make this work with async functions
 // 
-    if ((wolfCheck === 1) && (player.location === 'cliffSide8')) {
+    if ((wolfCheck === 1) && ((await deathQuestGameFunctions.inventoryFind(playerId, 'location')) === 'cliffSide8')) {
         res.sendFile(path.join(__dirname, '/html/wolfWarningCliffSide.html'));
     }
-    else if ((wolfCheck === 1) && (player.location === 'slimePuddles6')) {
+    else if ((wolfCheck === 1) && ((await deathQuestGameFunctions.inventoryFind(playerId, 'location')) === 'slimePuddles6')) {
         res.sendFile(path.join(__dirname, '/html/wolfWarningSlimePuddles.html'));
     }
     else if (wolfCheck === 2) { 
-        deathQuestGameFunctions.updatePlayer(player, { location: 'bridgePlateau9' })
+        deathQuestGameFunctions.updatePlayer(playerId, { location: 'bridgePlateau9' })
 
-        if (player.event4 === 'drawBridge') {
+        if ((await deathQuestGameFunctions.inventoryFind(playerId, 'event4')) === 'drawBridge') {
             res.sendFile(path.join(__dirname, '/html/bridgePlateau9Down.html')); 
         } 
-        else if (player.tool === 'Sword') {
+        else if ((await deathQuestGameFunctions.inventoryFind(playerId, 'tool')) === 'Sword') {
             res.sendFile(path.join(__dirname, '/html/bridgePlateau9Sword.html')); 
-            deathQuestGameFunctions.updatePlayer(player, { event2: 'slimebridge' })
+            deathQuestGameFunctions.updatePlayer(playerId, { event2: 'drawBridge' })
         } 
-        else if (player.tool === 'Bow') {
+        else if ((await deathQuestGameFunctions.inventoryFind(playerId, 'tool')) === 'Bow') {
             res.sendFile(path.join(__dirname, '/html/bridgePlateau9Bow.html')); 
         }
-        else if (player.tool === 'Torch') {
+        else if ((await deathQuestGameFunctions.inventoryFind(playerId, 'tool')) === 'Torch') {
             res.sendFile(path.join(__dirname, '/html/bridgePlateau9Torch.html')); 
         }
     }
@@ -214,7 +214,7 @@ router.get('/bridgePlateau9', async (req, res) => {
 router.get('/castle10', async (req, res) => {
     let witchCheck = parseInt(req.query.witchCheck) 
 
-    if (player.event3 !== 'witchHutMelt') {
+    if ((await deathQuestGameFunctions.inventoryFind(playerId, 'event3')) !== 'witchHutMelt') {
         if (!witchCheck) {
             res.sendFile(path.join(__dirname, '/html/turnBackCastle.html')); 
         } 
@@ -223,16 +223,16 @@ router.get('/castle10', async (req, res) => {
         }
     } 
     else {
-        deathQuestGameFunctions.updatePlayer(player, { location: 'castle10' })
+        deathQuestGameFunctions.updatePlayer(playerId, { location: 'castle10' })
         res.sendFile(path.join(__dirname, '/html/castle10.html'));
     }
        
 }) 
 
 router.get('/bigBaddie11', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'bigBaddie11' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'bigBaddie11' })
 
-    if (player.item2 === 'Golden Key') {
+    if ((await deathQuestGameFunctions.inventoryFind(playerId, 'item2')) === 'Golden Key') {
         res.sendFile(path.join(__dirname, '/html/bigBaddie11Key.html'));
     }
     else {
@@ -241,17 +241,17 @@ router.get('/bigBaddie11', async (req, res) => {
 }) 
 
 router.get('/deathRoom12', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'start1' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/deathRoom12.html'));
 }) 
 
 router.get('/witchGive', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'start1', event3: 'witchHutMelt', item2: 'Golden Key' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'slimePuddles6', event3: 'witchHutMelt', item2: 'Golden Key' })
     res.sendFile(path.join(__dirname, '/html/witchGive.html'));
 }) 
 
 router.get('/witchDie', async (req, res) => {
-    deathQuestGameFunctions.updatePlayer(player, { location: 'start1' })
+    deathQuestGameFunctions.updatePlayer(playerId, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/witchDie.html'));
 }) 
 
