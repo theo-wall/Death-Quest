@@ -35,19 +35,21 @@ router.get('/start1a', async (req, res) => {
 router.get('/start1b', (req, res) => {
     let toolPickUp = parseInt(req.query.tool)
 
-    player.tool = deathQuestGameFunctions.giveTool(toolPickUp)
+    deathQuestGameFunctions.updatePlayer(player, { tool: deathQuestGameFunctions.giveTool(toolPickUp) })
+
+    // player.tool = deathQuestGameFunctions.giveTool(toolPickUp)
     res.sendFile(path.join(__dirname, '/html/start1b.html'))
 })
 
 router.get('/start1', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(1)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/start1.html'))
 })
 
 
 router.get('/caves2', (req, res) => {
     let darkCheck = parseInt(req.query.darkCheck) 
-    player = deathQuestGameFunctions.roomChanger(2)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'caves2' })
 
     if (darkCheck === 1) {
         res.sendFile(path.join(__dirname, '/html/darkWarningStart.html'))
@@ -63,7 +65,7 @@ router.get('/caves2', (req, res) => {
 }) 
 
 router.get('/windingPath3', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(3)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'windingPath3' })
     let darkCheck = parseInt(req.query.darkCheck) 
     
     if (darkCheck === 1) {
@@ -80,7 +82,7 @@ router.get('/windingPath3', (req, res) => {
 }) 
 
 router.get('/crypt4', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(4)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'crypt4' })
     
     if (player.event1 === 'necroDoor') {
         res.sendFile(path.join(__dirname, '/html/crypt4NecroDoor.html'))
@@ -97,8 +99,7 @@ router.get('/necromancerGame13', (req, res) => {
         res.sendFile(path.join(__dirname, '/html/necromancerGame13.html'))
     }
     else if (rubyCheck === 1) {
-        player = deathQuestGameFunctions.giveItem(1)
-        player = deathQuestGameFunctions.eventPlacer(1)
+        deathQuestGameFunctions.updatePlayer(player, { item1: 'Ruby', event1: 'necroDoor' })
         res.sendFile(path.join(__dirname, '/html/necromancerGame13Win.html'))
     }
     
@@ -137,7 +138,7 @@ router.get('/swamp5', (req, res) => {
     }
     else if (fallCheck === 2) { 
 
-        player = deathQuestGameFunctions.roomChanger(5)
+        deathQuestGameFunctions.updatePlayer(player, { location: 'swamp5' })
         let slipCheck = deathQuestGameFunctions.generateRandNum(10)
 
 
@@ -151,7 +152,7 @@ router.get('/swamp5', (req, res) => {
 }) 
 
 router.get('/slimePuddles6', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(6)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'slimePuddles6' })
     
     if (player === 'slimeBridge') {
         res.sendFile(path.join(__dirname, '/html/slimePuddles6Down.html'));          
@@ -164,7 +165,7 @@ router.get('/slimePuddles6', (req, res) => {
 }) 
 
 router.get('/witchHut7', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(7)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'witchHut7' })
     if (player.event3 === 'witchHutMelt') {
         res.sendFile(path.join(__dirname, '/html/witchHut7Melt.html')); 
     }
@@ -177,13 +178,15 @@ router.get('/witchHut7', (req, res) => {
 }) 
 
 router.get('/cliffSide8', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(8)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'cliffSide8' })
     res.sendFile(path.join(__dirname, '/html/cliffSide8.html')); 
 }) 
 
 router.get('/bridgePlateau9', (req, res) => {
     let wolfCheck = parseInt(req.query.wolfCheck) 
-
+// 
+// Make this work with async functions
+// 
     if ((wolfCheck === 1) && (player.location === 'cliffSide8')) {
         res.sendFile(path.join(__dirname, '/html/wolfWarningCliffSide.html'));
     }
@@ -191,14 +194,14 @@ router.get('/bridgePlateau9', (req, res) => {
         res.sendFile(path.join(__dirname, '/html/wolfWarningSlimePuddles.html'));
     }
     else if (wolfCheck === 2) { 
-        player = deathQuestGameFunctions.roomChanger(9)
+        deathQuestGameFunctions.updatePlayer(player, { location: 'bridgePlateau9' })
 
         if (player.event4 === 'drawBridge') {
             res.sendFile(path.join(__dirname, '/html/bridgePlateau9Down.html')); 
         } 
         else if (player.tool === 'Sword') {
             res.sendFile(path.join(__dirname, '/html/bridgePlateau9Sword.html')); 
-            player = deathQuestGameFunctions.eventPlacer(4)
+            deathQuestGameFunctions.updatePlayer(player, { event2: 'slimebridge' })
         } 
         else if (player.tool === 'Bow') {
             res.sendFile(path.join(__dirname, '/html/bridgePlateau9Bow.html')); 
@@ -221,13 +224,14 @@ router.get('/castle10', (req, res) => {
         }
     } 
     else {
+        deathQuestGameFunctions.updatePlayer(player, { location: 'castle10' })
         res.sendFile(path.join(__dirname, '/html/castle10.html'));
     }
        
 }) 
 
 router.get('/bigBaddie11', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(11)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'bigBaddie11' })
 
     if (player.item2 === 'Golden Key') {
         res.sendFile(path.join(__dirname, '/html/bigBaddie11Key.html'));
@@ -238,19 +242,17 @@ router.get('/bigBaddie11', (req, res) => {
 }) 
 
 router.get('/deathRoom12', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(1)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/deathRoom12.html'));
 }) 
 
 router.get('/witchGive', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(6)
-    player = deathQuestGameFunctions.eventPlacer(3)
-    player = deathQuestGameFunctions.giveItem(2)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'start1', event3: 'witchHutMelt', item2: 'Golden Key' })
     res.sendFile(path.join(__dirname, '/html/witchGive.html'));
 }) 
 
 router.get('/witchDie', (req, res) => {
-    player = deathQuestGameFunctions.roomChanger(1)
+    deathQuestGameFunctions.updatePlayer(player, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/witchDie.html'));
 }) 
 

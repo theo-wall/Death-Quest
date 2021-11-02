@@ -1,7 +1,5 @@
 Bugs
-- All levels are accessable by URL
-- you dont have to go to listed locations from current room
-- make proper reset game
+-have database update tools an get all tool checks from database
 
 
 Features:
