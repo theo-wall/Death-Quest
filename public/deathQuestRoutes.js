@@ -7,16 +7,7 @@ const router = express.Router()
 
 // let player = []
 
-let player = {
-    location: '',
-    tool: 'noTool',
-    item1: 'noItem1',
-    item2: 'noItem2',
-    event1: 'noEvent',
-    event2: 'noEvent',
-    event3: 'noEvent',
-    event4: 'noEvent'
-}
+let player
 
 // 
 // starting game screen
@@ -26,9 +17,10 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'/html/index.html'))
   })
 
-router.get('/startGame', (req, res) => {
+router.get('/startGame', async (req, res) => {
     res.sendFile(path.join(__dirname, '/html/startGame.html'))
-    player = deathQuestGameFunctions.startGame()
+    player = await deathQuestGameFunctions.newPlayer()
+    console.log(player)
 })
 
 router.get('/resetGame', (req, res) => {
@@ -36,9 +28,10 @@ router.get('/resetGame', (req, res) => {
     player = deathQuestGameFunctions.resetGame()
 })
 
-router.get('/start1a', (req, res) => {    
+router.get('/start1a', async (req, res) => {
+    console.log(player)    
     res.sendFile(path.join(__dirname, '/html/start1a.html'))
-    player = deathQuestGameFunctions.roomChanger(1)
+    deathQuestGameFunctions.updatePlayer(player, {location: 'start1'})
 })
 
 router.get('/start1b', (req, res) => {
