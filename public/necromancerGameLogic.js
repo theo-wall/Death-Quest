@@ -33,7 +33,7 @@ function checkIfArrayIsUnique(myArray) {
         
           <div id="content">
             <p id="flavour">
-              the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Win The Ruby.
+              the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Win The, <span style="color: red;">ruby</span>.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ function checkIfArrayIsUnique(myArray) {
         
         <div id="content">
           <p id="flavour">
-            the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You Win The Ruby.
+            the Necromancer shows you the dice and they come up ${diceRoll[0]}, ${diceRoll[1]}, ${diceRoll[2]}, ${diceRoll[3]}, ${diceRoll[4]}, ${diceRoll[5]}. You win the <span style="color: red;">ruby</span>.
           </p>
         </div>
 
