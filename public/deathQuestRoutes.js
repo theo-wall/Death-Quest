@@ -16,6 +16,38 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'/html/index.html'))
   })
 
+router.get('/displayInventory', async (req, res) => {
+    let item1 = await deathQuestGameFunctions.inventoryFind(playerId,'item1')
+    let item2 = await deathQuestGameFunctions.inventoryFind(playerId,'item2')
+
+    res.send(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="../deathQuestRoutes.js"></script><title>Death Quest</title><link rel="stylesheet" type="text/css" href="/styles.css" /><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"rel="stylesheet"></head>
+  <body>
+    <div>
+      <p id="flavour">
+        You look in your pockets and find: 
+        <br/> 
+        ${item1 ? item1 : 'Pocket Lint'}
+        <br/>
+        ${item2 ? item2 : 'Nail Clippings'}
+      </p>
+    </div>
+
+    <nav>
+      <ul>
+        <li id='choiceList'>
+          <a href="http://Localhost:3000/start1">Carry On</a>
+        </li>
+      </ul>
+    </nav>
+
+  </body>
+
+</html>
+`)
+
+
+  })
+
 router.get('/startGame', async (req, res) => {  
     playerId = await deathQuestGameFunctions.newPlayer()
     res.sendFile(path.join(__dirname, '/html/startGame.html'))

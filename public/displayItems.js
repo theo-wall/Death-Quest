@@ -1,5 +1,10 @@
 
-// const playerId = require('./deathQuestRoutes')
+const deathQuestGameFunctions = require('./deathQuestGameFunctions')
+const playerId = require('./deathQuestGameFunctions')
+
+playerId = deathQuestGameFunctions.giveCurrentId();
+
+ console.log(playerId)
 
 // async function inventoryFind(id, slot) {
 //   try {
@@ -40,24 +45,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
   match.addEventListener('click', function () {
 
-      let content = document.querySelector('#content')
-      content.innerHTML = `    
-        
-          <div id="content">
-            <p id="flavour">
-            ${playerId}
-              {deathQuestRoutes.playerId}
-              {deathQuestRoutes.playerId}
-            </p>
-          </div>
+   
 
-          <nav>
-            <ul>
-            <li id='cont'><a href="/necromancerGame13?rubyCheck=1">Get Out Of Here</a></li>
-            </ul>
-          </nav>
-          `
-      }
-    )
+      // let content = document.querySelector('#content')
+      // content.innerHTML = `    
+        
+      //     <div id="content">
+      //       <p id="flavour">
+      //       ${playerId}
+      //         {deathQuestRoutes.playerId}
+      //         {deathQuestRoutes.playerId}
+      //       </p>
+      //     </div>
+
+      //     <nav>
+      //       <ul>
+      //       <li id='cont'><a href="/necromancerGame13?rubyCheck=1">Get Out Of Here</a></li>
+      //       </ul>
+      //     </nav>
+      //     `
+      })
 })
 

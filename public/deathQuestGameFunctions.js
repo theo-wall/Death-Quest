@@ -2,6 +2,27 @@ const { ObjectId } = require('mongodb')
 const db = require('../db')
 
 let toolIndex = ['Sword', 'Bow', 'Torch']
+let playerId 
+
+async function inventoryCheck(id,slot) {
+    let playerCollection = await db.getCollection('dqPlayers')
+    let player = await playerCollection.findOne({ _id: ObjectId(id)})
+
+    if(player.item1) {
+        return true
+    }
+    else if (player.item2) {
+        return true
+    }
+    else {
+        return false
+    }
+
+}
+
+function giveCurrentId() {
+    return playerId
+} 
 
 function giveTool(index) {
     let tool = toolIndex[index]
@@ -13,8 +34,8 @@ async function newPlayer() {
     let newPlayer = {
         location: '',
         tool: 'noTool',
-        item1: 'noItem1',
-        item2: 'noItem2',
+        item1: null,
+        item2: null,
         event1: 'noEvent',
         event2: 'noEvent',
         event3: 'noEvent',
@@ -25,6 +46,7 @@ async function newPlayer() {
     let newPlayerId = await createPlayer(newPlayer)
     console.log(`Created new player for ${newPlayer}.`)
     console.log(newPlayerId)
+    playerId = newPlayerId
     return newPlayerId
     }catch (error) {
         console.log(error)
@@ -45,7 +67,6 @@ async function inventoryFind(id,slot) {
     try { 
         let playerCollection = await db.getCollection('dqPlayers')
         let player = await playerCollection.findOne({ _id: ObjectId(id)})
-        console.log(player)
         if (slot === 'location') {
             return player.location
         }
@@ -85,12 +106,6 @@ async function findPlayerById(id) {
     return player
 }
 
-async function findPlayerByName(name) {
-    let playerCollection = await db.getCollection('dqPlayers')
-    let player = await playerCollection.findOne({ playerName: name })
-    return player
-}
-
 async function updatePlayer(id, newData) {
     let playerCollection = await db.getCollection('dqPlayers')
     return playerCollection.updateOne({ _id: ObjectId(id)}, { $set: newData })
@@ -108,5 +123,7 @@ module.exports = {
     newPlayer,
     updatePlayer,
     inventoryFind,
-    deletePlayerById
+    deletePlayerById,
+    findPlayerById,
+    giveCurrentId
 }
