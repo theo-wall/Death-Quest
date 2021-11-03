@@ -21,7 +21,7 @@ router.get('/startGame', async (req, res) => {
     res.sendFile(path.join(__dirname, '/html/startGame.html'))
 })
 
-router.get('/resetGame', (req, res) => {
+router.get('/resetGame', async (req, res) => {
     playerId = await deathQuestGameFunctions.newPlayer()
     res.sendFile(path.join(__dirname, '/html/resetGame.html'))
 })
