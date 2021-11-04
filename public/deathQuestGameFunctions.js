@@ -4,20 +4,12 @@ const db = require('../db')
 let toolIndex = ['Sword', 'Bow', 'Torch']
 let playerId 
 
-async function inventoryCheck(id,slot) {
-    let playerCollection = await db.getCollection('dqPlayers')
-    let player = await playerCollection.findOne({ _id: ObjectId(id)})
+// adds spans with css tags to convert variables into strings with spans
 
-    if(player.item1) {
-        return true
-    }
-    else if (player.item2) {
-        return true
-    }
-    else {
-        return false
-    }
-
+function colorizer(text,idTag) {
+    let colorText = `<span id='${idTag}'>${text}</span>`
+    console.log(colorText)
+    return colorText
 }
 
 function giveCurrentId() {
@@ -125,5 +117,6 @@ module.exports = {
     inventoryFind,
     deletePlayerById,
     findPlayerById,
-    giveCurrentId
+    giveCurrentId,
+    colorizer
 }

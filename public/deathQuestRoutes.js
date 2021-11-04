@@ -20,6 +20,8 @@ router.get('/displayInventory', async (req, res) => {
     let item1 = await deathQuestGameFunctions.inventoryFind(playerId,'item1')
     let item2 = await deathQuestGameFunctions.inventoryFind(playerId,'item2')
     let location = await deathQuestGameFunctions.inventoryFind(playerId, 'location')
+    let item1Color = deathQuestGameFunctions.colorizer(item1,'ruby')
+    let item2Color = deathQuestGameFunctions.colorizer(item2,'key')
 
     res.send(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="../deathQuestRoutes.js"></script><title>Death Quest</title><link rel="stylesheet" type="text/css" href="/styles.css" /><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"rel="stylesheet"></head>
   <body>
@@ -27,9 +29,9 @@ router.get('/displayInventory', async (req, res) => {
       <p id="flavour">
         You look in your pockets and find: 
         <br/> 
-        ${item1 ? item1 : 'Pocket Lint'}
+        ${item1 ? item1Color : 'Pocket Lint'}
         <br/>
-        ${item2 ? item2 : 'Nail Clippings'}
+        ${item2 ? item2Color : 'Nail Clippings'}
       </p>
     </div>
 
@@ -45,8 +47,6 @@ router.get('/displayInventory', async (req, res) => {
 
 </html>
 `)
-
-
   })
 
 router.get('/startGame', async (req, res) => {  
