@@ -2,7 +2,7 @@ const { ObjectId } = require('mongodb')
 const db = require('../db')
 
 let toolIndex = ['Sword', 'Bow', 'Torch']
-
+let newPlayerId
 // adds spans with css tags to convert variables into strings with spans
 
 function colorizer(text,idTag) {
@@ -21,13 +21,18 @@ function giveTool(index) {
 // returns true or false if valid mongoDB ID
 
 async function validateId(id) {
-    // console.log(id)
+    console.log(newPlayerId)
     let playerCollection = await db.getCollection('dqPlayers')
     let playerId = await playerCollection.findOne({ _id: ObjectId(id)})
     if(playerId) {
+        newPlayerId = playerId
+        console.log(playerId)
         return true
     }
     else {
+        
+        newPlayerId = playerId
+        console.log(playerId)
         return false
     }
 }

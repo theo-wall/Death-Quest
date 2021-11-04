@@ -70,7 +70,50 @@ router.get('/saveGame', async (req, res) => {
 })
 
 router.get('/continueGame', async (req, res) => {
-    res.sendFile(path.join(__dirname, '/html/continueGame.html'))
+    res.send(`
+    <!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Death Quest</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"
+      rel="stylesheet">
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        let contId = document.querySelector('#newPlayerId')
+        let cont = document.querySelector('#cont')
+
+        cont.addEventListener('click', function () {
+          console.log(contId.value)
+          deathQuestGameFunctions.validateId(contId.value)
+        })
+      })
+    </script>
+  </head>
+
+  <body>
+
+    <div>
+      <label for="newPlayerId"></label>
+      <input id="newPlayerId" type="text"></input>
+      <ul>
+        <li id='choiceList'>
+          <a id="cont">Carry On</a>
+        </li>
+      </ul>
+    </div>
+
+  </body>
+
+</html>
+    
+    
+    `)
 
 })
 
