@@ -70,54 +70,16 @@ router.get('/saveGame', async (req, res) => {
 })
 
 router.get('/continueGame', async (req, res) => {
-    let newId 
-    res.send(`
-    <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <script src="../deathQuestGameFunctions.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Death Quest</title>
-    <link rel="stylesheet" type="text/css" href="/styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"
-      rel="stylesheet">
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        let contId = document.querySelector('#newPlayerId')
-        let cont = document.querySelector('#cont')
-
-        cont.addEventListener('click', function () {
-          console.log(contId.value)
-          let newId = contId.value
-          console.log(newId)
-          await deathQuestGameFunctions.validateId(newId)
-        })
-      })
-    </script>
-  </head>
-
-  <body>
-
-    <div>
-      <label for="newPlayerId"></label>
-      <input id="newPlayerId" type="text"></input>
-      <ul>
-        <li id='choiceList'>
-          <a id="cont">Continue</a>
-        </li>
-      </ul>
-    </div>
-
-  </body>
-
-</html>
-    
-    
-    `)
+    let contId = req.query.contId
+  
+    if(await deathQuestGameFunctions.validateId(contId)) {
+        playerId = contId
+        deathQuestGameFunctions.updatePlayer(playerId, { location: 'start1' })
+        res.sendFile(path.join(__dirname, '/html/start1.html'))
+    }
+    else {
+        res.sendFile(path.join(__dirname, '/html/returnToStart.html'))
+    }
 
 })
 
@@ -146,14 +108,9 @@ router.get('/start1b', async (req, res) => {
 
 router.get('/start1', async (req, res) => {
     // console.log(playerId)
-    console.log(await deathQuestGameFunctions.validateId(playerId))
-    if(await deathQuestGameFunctions.validateId(playerId)) {
     deathQuestGameFunctions.updatePlayer(playerId, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/start1.html'))
-    }
-    else {
-        res.sendFile(path.join(__dirname, '/html/returnToStart.html'))
-    }
+ 
 })
 
 

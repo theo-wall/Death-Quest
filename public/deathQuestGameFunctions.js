@@ -22,17 +22,15 @@ function giveTool(index) {
 
 async function validateId(id) {
     console.log(newPlayerId)
-    let playerCollection = await db.getCollection('dqPlayers')
-    let playerId = await playerCollection.findOne({ _id: ObjectId(id)})
-    if(playerId) {
-        newPlayerId = playerId
-        console.log(playerId)
-        return true
-    }
-    else {
-        
-        newPlayerId = playerId
-        console.log(playerId)
+    try {
+        let playerCollection = await db.getCollection('dqPlayers')
+        let playerId = await playerCollection.findOne({ _id: ObjectId(id)})
+        if(playerId) {
+            newPlayerId = playerId
+            console.log(playerId)
+            return true
+        }
+    } catch (error) {
         return false
     }
 }
