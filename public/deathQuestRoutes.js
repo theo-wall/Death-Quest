@@ -70,11 +70,13 @@ router.get('/saveGame', async (req, res) => {
 })
 
 router.get('/continueGame', async (req, res) => {
+    let newId 
     res.send(`
     <!DOCTYPE html>
 <html lang="en">
 
   <head>
+    <script src="../deathQuestGameFunctions.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Death Quest</title>
@@ -90,7 +92,9 @@ router.get('/continueGame', async (req, res) => {
 
         cont.addEventListener('click', function () {
           console.log(contId.value)
-          deathQuestGameFunctions.validateId(contId.value)
+          let newId = contId.value
+          console.log(newId)
+          await deathQuestGameFunctions.validateId(newId)
         })
       })
     </script>
@@ -103,7 +107,7 @@ router.get('/continueGame', async (req, res) => {
       <input id="newPlayerId" type="text"></input>
       <ul>
         <li id='choiceList'>
-          <a id="cont">Carry On</a>
+          <a id="cont">Continue</a>
         </li>
       </ul>
     </div>
