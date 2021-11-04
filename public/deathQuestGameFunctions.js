@@ -8,7 +8,6 @@ let playerId
 
 function colorizer(text,idTag) {
     let colorText = `<span id='${idTag}'>${text}</span>`
-    console.log(colorText)
     return colorText
 }
 

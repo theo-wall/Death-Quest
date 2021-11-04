@@ -19,30 +19,30 @@ router.get('/displayInventory', async (req, res) => {
     let item2Color = deathQuestGameFunctions.colorizer(item2,'key')
 
     res.send(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="../deathQuestRoutes.js"></script><title>Death Quest</title><link rel="stylesheet" type="text/css" href="/styles.css" /><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"rel="stylesheet"></head>
-  <body>
-    <div>
-      <p id="flavour">
-        You look in your pockets and find: 
-        <br/> 
-        ${item1 ? item1Color : 'Pocket Lint'}
-        <br/>
-        ${item2 ? item2Color : 'Nail Clippings'}
-      </p>
-    </div>
+        <body>
+            <div>
+            <p id="flavour">
+                You look in your pockets and find: 
+                <br/> 
+                ${item1 ? item1Color : 'Pocket Lint'}
+                <br/>
+                ${item2 ? item2Color : 'Nail Clippings'}
+            </p>
+            </div>
 
-    <nav>
-      <ul>
-        <li id='choiceList'>
-          <a href="http://Localhost:3000/${location}">Carry On</a>
-        </li>
-      </ul>
-    </nav>
+            <nav>
+            <ul>
+                <li id='choiceList'>
+                <a href="http://Localhost:3000/${location}">Carry On</a>
+                </li>
+            </ul>
+            </nav>
 
-  </body>
+        </body>
 
-</html>
-`)
-  })
+    </html>
+    `)
+})
 
 router.get('/startGame', async (req, res) => {  
     playerId = await deathQuestGameFunctions.newPlayer()
