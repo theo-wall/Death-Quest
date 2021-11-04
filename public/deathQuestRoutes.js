@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
 router.get('/displayInventory', async (req, res) => {
     let item1 = await deathQuestGameFunctions.inventoryFind(playerId,'item1')
     let item2 = await deathQuestGameFunctions.inventoryFind(playerId,'item2')
+    let location = await deathQuestGameFunctions.inventoryFind(playerId, 'location')
 
     res.send(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="../deathQuestRoutes.js"></script><title>Death Quest</title><link rel="stylesheet" type="text/css" href="/styles.css" /><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"rel="stylesheet"></head>
   <body>
@@ -35,7 +36,7 @@ router.get('/displayInventory', async (req, res) => {
     <nav>
       <ul>
         <li id='choiceList'>
-          <a href="http://Localhost:3000/start1">Carry On</a>
+          <a href="http://Localhost:3000/${location}">Carry On</a>
         </li>
       </ul>
     </nav>
@@ -92,6 +93,9 @@ router.get('/caves2', async (req, res) => {
             res.sendFile(path.join(__dirname, '/html/caves2Death.html'))
         } 
     }
+    else {
+        res.sendFile(path.join(__dirname, '/html/caves2.html'))
+    }
 }) 
 
 router.get('/windingPath3', async (req, res) => {
@@ -108,6 +112,9 @@ router.get('/windingPath3', async (req, res) => {
         else {
             res.sendFile(path.join(__dirname, '/html/caves2Death.html'))
         }
+    }
+    else {
+        res.sendFile(path.join(__dirname, '/html/windingPath3.html'))
     }
 }) 
 
@@ -138,10 +145,10 @@ router.get('/swamp5', async (req, res) => {
     let fallCheck = parseInt(req.query.fallCheck) 
 
     if (fallCheck === 1 && (await deathQuestGameFunctions.inventoryFind(playerId,'location')) === 'start1') {
-        res.sendFile(path.join(__dirname, '/html/fallWarningStart.html'));
+        res.sendFile(path.join(__dirname, '/html/fallWarningStart.html'))
     } 
     else if (fallCheck === 1 && (await deathQuestGameFunctions.inventoryFind(playerId, 'location')) === 'slimePuddles6') {
-        res.sendFile(path.join(__dirname, '/html/fallWarningPuddles.html'));
+        res.sendFile(path.join(__dirname, '/html/fallWarningPuddles.html'))
     }
     else if (fallCheck === 2) { 
 
@@ -149,11 +156,14 @@ router.get('/swamp5', async (req, res) => {
         let slipCheck = deathQuestGameFunctions.generateRandNum(10)
 
         if (slipCheck <= 6) {
-            res.sendFile(path.join(__dirname, '/html/swamp5.html')); 
+            res.sendFile(path.join(__dirname, '/html/swamp5.html')) 
                 } 
         else if (slipCheck > 6) {
-            res.sendFile(path.join(__dirname, '/html/swamp5Slip.html')); 
+            res.sendFile(path.join(__dirname, '/html/swamp5Slip.html')) 
         }
+    }
+    else {
+        res.sendFile(path.join(__dirname, '/html/swamp5.html'))
     }
 }) 
 
@@ -162,12 +172,15 @@ router.get('/slimePuddles6', async (req, res) => {
     
     if (await deathQuestGameFunctions.inventoryFind(playerId, 'event2') === 'slimeBridge') {
         res.sendFile(path.join(__dirname, '/html/slimePuddles6Down.html'));          
-    } else if (await deathQuestGameFunctions.inventoryFind(playerId, 'tool') === 'Bow') {
+    } 
+    else if (await deathQuestGameFunctions.inventoryFind(playerId, 'tool') === 'Bow') {
         res.sendFile(path.join(__dirname, '/html/slimePuddles6Bow.html')); 
         deathQuestGameFunctions.updatePlayer(playerId, { event2: 'slimeBridge' })
-    } else if (await deathQuestGameFunctions.inventoryFind(playerId, 'event2') === 'noEvent') {
+    } 
+    else if (await deathQuestGameFunctions.inventoryFind(playerId, 'event2') === 'noEvent') {
         res.sendFile(path.join(__dirname, '/html/slimePuddles6up.html')); 
     }
+
 }) 
 
 router.get('/witchHut7', async (req, res) => {
@@ -197,7 +210,7 @@ router.get('/bridgePlateau9', async (req, res) => {
     else if ((wolfCheck === 1) && ((await deathQuestGameFunctions.inventoryFind(playerId, 'location')) === 'slimePuddles6')) {
         res.sendFile(path.join(__dirname, '/html/wolfWarningSlimePuddles.html'));
     }
-    else if (wolfCheck === 2) { 
+    else { 
         deathQuestGameFunctions.updatePlayer(playerId, { location: 'bridgePlateau9' })
 
         if ((await deathQuestGameFunctions.inventoryFind(playerId, 'event4')) === 'drawBridge') {
