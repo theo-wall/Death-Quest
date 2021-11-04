@@ -44,7 +44,37 @@ router.get('/displayInventory', async (req, res) => {
     `)
 })
 
-router.get('/startGame', async (req, res) => {  
+router.get('/saveGame', async (req, res) => {
+        let saveId = await deathQuestGameFunctions.giveCurrentId(playerId)
+        console.log(saveId)  
+        res.send(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="../deathQuestRoutes.js"></script><title>Death Quest</title><link rel="stylesheet" type="text/css" href="/styles.css" /><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=MedievalSharp&display=swap"rel="stylesheet"></head>
+        <body>
+            <div>
+            <p id="flavour">
+                If you want to come back and keep playing remember this code: ${saveId}
+            </p>
+            </div>
+
+            <nav>
+            <ul>
+                <li id='choiceList'>
+                <a href="">Go Do Something Fun Then</a>
+                </li>
+            </ul>
+            </nav>
+
+        </body>
+
+    </html>
+    `)
+})
+
+router.get('/continueGame', async (req, res) => {
+    res.sendFile(path.join(__dirname, '/html/continueGame.html'))
+
+})
+
+router.get('/startGame', async (req, res) => { 
     playerId = await deathQuestGameFunctions.newPlayer()
     res.sendFile(path.join(__dirname, '/html/startGame.html'))
 })
@@ -68,8 +98,15 @@ router.get('/start1b', async (req, res) => {
 })
 
 router.get('/start1', async (req, res) => {
+    // console.log(playerId)
+    console.log(await deathQuestGameFunctions.validateId(playerId))
+    if(await deathQuestGameFunctions.validateId(playerId)) {
     deathQuestGameFunctions.updatePlayer(playerId, { location: 'start1' })
     res.sendFile(path.join(__dirname, '/html/start1.html'))
+    }
+    else {
+        res.sendFile(path.join(__dirname, '/html/returnToStart.html'))
+    }
 })
 
 
@@ -186,7 +223,8 @@ router.get('/witchHut7', async (req, res) => {
     else if (await deathQuestGameFunctions.inventoryFind(playerId, 'item1') === 'Ruby') {
         res.sendFile(path.join(__dirname, '/html/witchHut7Ruby.html')); 
     } 
-    else if (await deathQuestGameFunctions.inventoryFind(playerId, 'item1') === 'noItem1'){
+    else {
+    // (await deathQuestGameFunctions.inventoryFind(playerId, 'item1') === 'noItem1') 
         res.sendFile(path.join(__dirname, '/html/witchHut7NoRuby.html')); 
     }
 }) 

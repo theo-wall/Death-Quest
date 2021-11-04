@@ -2,7 +2,6 @@ const { ObjectId } = require('mongodb')
 const db = require('../db')
 
 let toolIndex = ['Sword', 'Bow', 'Torch']
-let playerId 
 
 // adds spans with css tags to convert variables into strings with spans
 
@@ -11,15 +10,38 @@ function colorizer(text,idTag) {
     return colorText
 }
 
-function giveCurrentId() {
-    return playerId
-} 
+// gives tool from tool index
 
 function giveTool(index) {
     let tool = toolIndex[index]
     console.log(tool)
     return tool 
 } 
+
+// returns true or false if valid mongoDB ID
+
+async function validateId(id) {
+    // console.log(id)
+    let playerCollection = await db.getCollection('dqPlayers')
+    let playerId = await playerCollection.findOne({ _id: ObjectId(id)})
+    if(playerId) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+// returns current player Id as a string
+
+async function giveCurrentId(id) {
+    let playerCollection = await db.getCollection('dqPlayers')
+    let playerId = await playerCollection.findOne({ _id: ObjectId(id)})
+    let toString = JSON.stringify(playerId._id)
+    return toString
+}
+
+// creates new player and uploads the object to mongo
 
 async function newPlayer() {
     let newPlayer = {
@@ -44,6 +66,8 @@ async function newPlayer() {
     }
 }
 
+// creates the player object for mongoDB
+
 async function createPlayer(playerData) {
     try {
     let playerCollection = await db.getCollection('dqPlayers')
@@ -53,6 +77,8 @@ async function createPlayer(playerData) {
         console.log(error)
     }
 }
+
+// finds specific item in inventory for game checks
 
 async function inventoryFind(id,slot) {
     try { 
@@ -87,9 +113,13 @@ async function inventoryFind(id,slot) {
     }
 }
 
+// generates random number between 1 and num
+
 function generateRandNum(num) {
    return Math.floor(Math.random() * (num + 1))
 }
+
+
 
 async function findPlayerById(id) {
     let playerCollection = await db.getCollection('dqPlayers')
@@ -117,5 +147,6 @@ module.exports = {
     deletePlayerById,
     findPlayerById,
     giveCurrentId,
-    colorizer
+    colorizer,
+    validateId
 }
