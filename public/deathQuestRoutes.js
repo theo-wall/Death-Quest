@@ -58,7 +58,7 @@ router.get('/saveGame', async (req, res) => {
             <nav>
             <ul>
                 <li id='choiceList'>
-                <a href="">Go Do Something Fun Then</a>
+                <a href="https://www.google.com/search?q=something+fun&oq=somethin&aqs=chrome.1.69i57j35i39j46i433i512j0i512l2j46i175i199i512j46i340i433i512j69i60.2563j1j7&sourceid=chrome&ie=UTF-8">Go Do Something Fun Then</a>
                 </li>
             </ul>
             </nav>
